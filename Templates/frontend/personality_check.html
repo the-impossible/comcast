@@ -1,0 +1,834 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jobs.comcast.com/ -->
+<html lang="en">
+
+	{% include 'frontend/include/head.html' %}
+
+<body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
+<div class="globaltoutpanel" style="display:none;">
+	<div class="globaltoutblock"></div>
+</div>
+
+<!-- Fixed navbar -->
+{% include 'frontend/include/nav.html' %}
+
+<div class="wrapper-container">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2RSM29"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<div class="jobs-page wrapper-content flex-column full-width" id="wrapperContent">
+		<!-- Region Top Panel -->
+		<div id="jq6fnf7d" class="cmp-region  container" style="max-width: none; margin: 0; padding: 0;" data-region-name="Top Panel" data-associate-field="N" data-field-value="">
+
+		<img class="w-100 " style="" data-src="" src="{% static 'frontend/img/jobs_Recruiters.jpg' %}" alt="Comcast employees smiling with text Create the Future with Us">
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Job Opportunities -->
+{% include 'frontend/include/messages.html' %}
+<div id="k2eu8rui" class="cmp-region  container" style="" data-region-name="Opportunities" data-associate-field="N" data-field-value="">
+
+	<div style="" class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+		<div class="flex-column full-width">
+			<p class="un-clickable color-gray-25 jobs-text-text " style="">
+				Dear {{user.name}}. <b>Please note that this is a no grade test, which can be taken two times only.</b> <br>
+				We look for certain qualities in our employees. This assessment test is structured to uncover similarities and differences between you and the company
+			</p>
+			<p class="un-clickable color-gray-25 jobs-text-text ">As you make your choices, assume that all jobs are of equal pay and prestige</p>
+		</div>
+	</div>
+
+	<div class="main_wd">
+		<div class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+			<div class="jobs-page jobs-corporate-card-row--card-link-out jobs-corporate-card-row-1 jobs-corporate-card-row-1--card-link-out mx-5">
+
+				<form action="" method="post" class="justify-center">
+					{% csrf_token %}
+
+					<h5>Select one that best describes you:</h5>
+
+					<label>
+						<input type="radio" name="job_preference" value="wildlife_expert" required>
+						I would rather be a wildlife expert
+					</label><br>
+
+					<label>
+						<input type="radio" name="job_preference" value="company_controller" required>
+						I would rather be a company controller
+					</label><br>
+
+					<label>
+						<input type="radio" name="job_preference" value="tax_lawyer" required>
+						I would rather be a tax lawyer
+					</label><br>
+
+					<label>
+						<input type="radio" name="job_preference" value="auditor" required>
+						I would rather be an auditor
+					</label><br>
+
+					<!-- Add more job preferences here -->
+
+					<h5>Select one that best describes you:</h5>
+
+					<label>
+						<input required type="radio" name="additional_preference" value="accounting_manager">
+						I would rather be an accounting manager
+					</label><br>
+
+					<label>
+						<input required type="radio" name="additional_preference" value="data_entry">
+						I would rather be a data entry
+					</label><br>
+
+					<label>
+						<input required type="radio" name="additional_preference" value="bookkeeper">
+						I would rather be a bookkeeper
+					</label><br>
+
+					<label>
+						<input required type="radio" name="additional_preference" value="customer_service_rep">
+						I would rather be a customer service rep
+					</label><br>
+
+					<label>
+						<input required type="radio" name="additional_preference" value="sales_professional">
+						I would rather be a sales professional
+					</label><br>
+
+					<!-- Add more additional job preferences here -->
+
+					<h5>Select one that best describes you:</h5>
+
+					<label>
+						<input required type="radio" name="personality_trait" value="accurate">
+						Accurate
+					</label><br>
+
+					<label>
+						<input required type="radio" name="personality_trait" value="thoughtful">
+						Thoughtful
+					</label><br>
+					<label>
+						<input required type="radio" name="personality_trait" value="leader">
+						Leader
+					</label><br>
+					<label>
+						<input required type="radio" name="personality_trait" value="supporting_role">
+						Supporting Role
+					</label><br>
+					<label>
+						<input required type="radio" name="personality_trait" value="informative">
+						Informative
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="math_skill" value="math" required>
+						Math
+					</label><br>
+
+					<label>
+						<input type="radio" name="math_skill" value="basic_skill" required>
+						Basic Skill
+					</label><br>
+
+					<label>
+						<input type="radio" name="math_skill" value="communication_skill" required>
+						Communication Skill
+					</label><br>
+
+					<label>
+						<input type="radio" name="math_skill" value="leadership_skill" required>
+						Leadership Skill
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="driven" value="driven_persuade" required>
+						Driven to Persuade
+					</label><br>
+
+					<label>
+						<input type="radio" name="driven" value="driven_data" required>
+						Driven by Data
+					</label><br>
+
+					<label>
+						<input type="radio" name="driven" value="driven_relationship" required>
+						Driven by Relationship
+					</label><br>
+
+					<label>
+						<input type="radio" name="driven" value="driven_routine" required>
+						Driven by Routine
+					</label><br>
+
+					<label>
+						<input type="radio" name="driven" value="driven_succeed" required>
+						Driven to Succeed
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="creative" value="creative" required>
+						Creative
+					</label><br>
+
+					<label>
+						<input type="radio" name="creative" value="systematic" required>
+						Systematic
+					</label><br>
+
+					<label>
+						<input type="radio" name="creative" value="gifted" required>
+						Gifted
+					</label><br>
+
+					<label>
+						<input type="radio" name="creative" value="down_to_earth" required>
+						Down to Earth
+					</label><br>
+
+					<label>
+						<input type="radio" name="creative" value="compassionate" required>
+						Compassionate
+					</label><br>
+
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="focus" value="focused_on_others" required>
+						Focused on Others
+					</label><br>
+
+					<label>
+						<input type="radio" name="focus" value="focused_on_tasks" required>
+						Focused on Tasks
+					</label><br>
+
+					<label>
+						<input type="radio" name="focus" value="focused_on_results" required>
+						Focused on Results
+					</label><br>
+
+					<label>
+						<input type="radio" name="focus" value="focused_on_numbers" required>
+						Focused on Numbers
+					</label><br>
+
+					<label>
+						<input type="radio" name="focus" value="focused_on_information" required>
+						Focused on Information
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="personality" value="sensitive" required>
+						Sensitive
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality" value="precise" required>
+						Precise
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality" value="faithful" required>
+						Faithful
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality" value="successful" required>
+						Successful
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality" value="outgoing" required>
+						Outgoing
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="technical" value="non_technical" required>
+						Non Technical
+					</label><br>
+
+					<label>
+						<input type="radio" name="technical" value="technical" required>
+						Technical
+					</label><br>
+
+					<label>
+						<input type="radio" name="technical" value="mechanical" required>
+						Mechanical
+					</label><br>
+
+					<label>
+						<input type="radio" name="technical" value="big_picture" required>
+						Big Picture
+					</label><br>
+
+					<label>
+						<input type="radio" name="technical" value="educational" required>
+						Educational
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="role" value="care_giver" required>
+						Care Giver
+					</label><br>
+
+					<label>
+						<input type="radio" name="role" value="salesperson" required>
+						Salesperson
+					</label><br>
+
+					<label>
+						<input type="radio" name="role" value="analyst" required>
+						Analyst
+					</label><br>
+
+					<label>
+						<input type="radio" name="role" value="laborer" required>
+						Laborer
+					</label><br>
+
+					<label>
+						<input type="radio" name="role" value="winner" required>
+						Winner
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="personality_type" value="computer_guru" required>
+						Computer Guru
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality_type" value="excellent_listener" required>
+						Excellent Listener
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality_type" value="back_office_support" required>
+						Back Office Support
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality_type" value="overachiever" required>
+						Overachiever
+					</label><br>
+
+					<label>
+						<input type="radio" name="personality_type" value="excellent_speaker" required>
+						Excellent Speaker
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="work_preference" value="fast_pace" required>
+						Enjoy a Fast Pace
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_preference" value="hands_on" required>
+						Enjoy Hands-On Work
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_preference" value="enjoys_details" required>
+						Enjoys Details
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_preference" value="advising_others" required>
+						Enjoys Advising Others
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_preference" value="spotlight" required>
+						Enjoys the Spotlight
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="communication_style" value="sensitive" required>
+						Sensitive to Others
+					</label><br>
+
+					<label>
+						<input type="radio" name="communication_style" value="friendly_relationship" required>
+						Friendly Relationship
+					</label><br>
+
+					<label>
+						<input type="radio" name="communication_style" value="precise_and_careful" required>
+						Precise and Careful
+					</label><br>
+
+					<label>
+						<input type="radio" name="communication_style" value="outspoken_and_unhurried" required>
+						Outspoken and Unhurried
+					</label><br>
+
+					<label>
+						<input type="radio" name="communication_style" value="steady_and_unhurried" required>
+						Steady and Unhurried
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="decision_making_style" value="slow_to_take_action" required>
+						Slow to Take Action
+					</label><br>
+
+					<label>
+						<input type="radio" name="decision_making_style" value="impossible_to_please" required>
+						Impossible to Please
+					</label><br>
+
+					<label>
+						<input type="radio" name="decision_making_style" value="slow_to_change" required>
+						Slow to Change
+					</label><br>
+
+					<label>
+						<input type="radio" name="decision_making_style" value="intimidating" required>
+						Intimidating
+					</label><br>
+
+					<label>
+						<input type="radio" name="decision_making_style" value="careless_with_details" required>
+						Careless with Details
+					</label><br>
+
+					<h5>Select one that best describes you</h5>
+
+					<label>
+						<input type="radio" name="leadership_style" value="follows_the_leader" required>
+						Follows the Leader
+					</label><br>
+
+					<label>
+						<input type="radio" name="leadership_style" value="follows_the_rules" required>
+						Follows the Rules
+					</label><br>
+
+					<label>
+						<input type="radio" name="leadership_style" value="follows_emotions" required>
+						Follows Emotions
+					</label><br>
+
+					<label>
+						<input type="radio" name="leadership_style" value="energizes_followers" required>
+						Energizes Followers
+					</label><br>
+
+					<label>
+						<input type="radio" name="leadership_style" value="lead_followers" required>
+						Lead Followers
+					</label><br>
+
+					<h5>I'm way smarter than average</h5>
+
+					<label>
+						<input type="radio" name="intelligence" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="intelligence" value="no" required>
+						No
+					</label><br>
+
+					<h5>I like challenging tasks</h5>
+
+					<label>
+						<input type="radio" name="like_challenges" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="like_challenges" value="no" required>
+						No
+					</label><br>
+
+					<h5>I see opportunity where others see only problems</h5>
+
+					<label>
+						<input type="radio" name="see_opportunity" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="see_opportunity" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'm highly determined and driven to succeed</h5>
+
+					<label>
+						<input type="radio" name="determination" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="determination" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'm not afraid to fail, if I can learn something from the experience</h5>
+
+					<label>
+						<input type="radio" name="learn_from_failure" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="learn_from_failure" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'm self-disciplined enough to work completely on my own</h5>
+
+					<label>
+						<input type="radio" name="self_disciplined" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="self_disciplined" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'm someone who strongly believes, "If it is to be, it's up to me".</h5>
+
+					<label>
+						<input type="radio" name="strong_believer" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="strong_believer" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'd rather have a 20% chance for a high income than an 80% chance of an average income.</h5>
+
+					<label>
+						<input type="radio" name="income_preference" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="income_preference" value="no" required>
+						No
+					</label><br>
+
+					<h5>I'm willing to take risks to achieve success</h5>
+
+					<label>
+						<input type="radio" name="willing_to_take_risks" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="willing_to_take_risks" value="no" required>
+						No
+					</label><br>
+
+					<h5>I want a job that provides health insurance and benefits</h5>
+
+					<label>
+						<input type="radio" name="health_insurance" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="health_insurance" value="no" required>
+						No
+					</label><br>
+
+					<h5>I want a job that doesn't require extensive travel</h5>
+
+					<label>
+						<input type="radio" name="no_extensive_travel" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="no_extensive_travel" value="no" required>
+						No
+					</label><br>
+
+					<h5>I would prefer mental work rather than physical work</h5>
+
+					<label>
+						<input type="radio" name="preference_work" value="yes" required>
+						Yes
+					</label><br>
+
+					<label>
+						<input type="radio" name="preference_work" value="no" required>
+						No
+					</label><br>
+
+					<h5>I have the ability and desire to provide general business skills to a company or organization</h5>
+
+					<label>
+						<input type="radio" name="business_skills" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="business_skills" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="business_skills" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to work as an employee or supervisor in a business environment.</h5>
+
+					<label>
+						<input type="radio" name="work_as_employee" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_as_employee" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="work_as_employee" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to provide administrative or customer support in an office environment.</h5>
+
+					<label>
+						<input type="radio" name="admin_support" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="admin_support" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="admin_support" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to work in a supporting role to perform simple tasks in an office</h5>
+
+					<label>
+						<input type="radio" name="supporting_role" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="supporting_role" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="supporting_role" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to provide compassion and service to those in need</h5>
+
+					<label>
+						<input type="radio" name="compassion_service" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="compassion_service" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="compassion_service" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to listen to people’s concern and challenges</h5>
+
+					<label>
+						<input type="radio" name="listen_concerns" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="listen_concerns" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="listen_concerns" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to maintain a company’s computer system</h5>
+
+					<label>
+						<input type="radio" name="maintain_computer" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="maintain_computer" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="maintain_computer" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to provide financial services in a business environment</h5>
+
+					<label>
+						<input type="radio" name="financial_services" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="financial_services" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="financial_services" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to provide basic services to a business or the public</h5>
+
+					<label>
+						<input type="radio" name="basic_services" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="basic_services" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="basic_services" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to work in a supporting role to perform simple tasks in an office.</h5>
+
+					<label>
+						<input type="radio" name="supporting_role" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="supporting_role" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="supporting_role" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<h5>I have the ability and desire to formulate and communicate ideas in writing.</h5>
+
+					<label>
+						<input type="radio" name="formulate_communicate" value="strongly_agree" required>
+						Strongly Agree
+					</label><br>
+
+					<label>
+						<input type="radio" name="formulate_communicate" value="indifferent" required>
+						Indifferent
+					</label><br>
+
+					<label>
+						<input type="radio" name="formulate_communicate" value="strongly_disagree" required>
+						Strongly Disagree
+					</label><br>
+
+					<button class="btn btn-primary btn-block my-5" type="submit">Submit</button>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+{% comment %} Footer {% endcomment %}
+	{% include 'frontend/include/footer.html' %}
+
+</div>
+</div>
+{% comment %} Scripts {% endcomment %}
+	{% include 'frontend/include/script.html' %}
+</html>

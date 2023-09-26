@@ -1,0 +1,78 @@
+{% load static %}
+<!-- Fixed navbar -->
+<nav isloggedin="false" ischeckedlogin="false" class="navbar jobs-page jobs-header fixed-top navbar-expand-lg navbar-light bg-light">
+
+    <a class="skip-link skip-main color-light-black font-bold font-15" href="{% url 'auth:home' %}">Skip to Content</a>
+
+    <a title="Comcast Careers" aria-label="Comcast Careers" class="navbar-brand logo flex-row" href="{% url 'auth:home' %}">
+		<img alt="logo" src="{% static 'frontend/img/logo.png' %}" width="auto" height="42" class="checked">
+	</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+
+		<div class="employee-logout employee-logout-desktop flex-row flex-v-center mr-3 login-flow-user-logged-in hide">
+			<span class="full-name">Hello, </span>
+			<a class="websec-logout flex-row flex-v-center" href="{% url 'auth:home' %} logout">
+				<img src="{% static 'frontend/img/icon-logout.svg' %}" alt="Sign Out">
+				<span>Sign Out</span>
+			</a>
+		</div>
+
+		<button class="navbar-toggler-close" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<ul class="navbar-nav ml-auto font-medium">
+
+			<li class="nav-item desktop-nav-item has-sub-menu dropdown">
+				<span class="nav-link toggle-button font-16  color-black" aria-haspopup="true">
+					<a class="color-black navigation__item__title ignore-dropdown-event" href="" role="link">
+					About
+					</a>
+				</span>
+			</li>
+
+			<li class="nav-item desktop-nav-item has-sub-menu dropdown">
+				<span class="nav-link toggle-button font-16  color-black" aria-haspopup="true">
+					<a class="color-black navigation__item__title ignore-dropdown-event" href="" role="link">
+					Contact Us
+					</a>
+				</span>
+			</li>
+
+			<li class="nav-item search-job active ml-4 mr-3">
+				<a title="Search Jobs" class="search-jobs-button nav-link blue-blur color-white border-radius-4 pl-4 pr-4" href="" internal-external-search-url="">Search Jobs</a>
+			</li>
+
+			<li class="nav-item employee-login active ml-0 mr-4 login-flow-user-not-logged-in">
+				<a class="websec-login nav-link purple color-white border-radius-4 pl-4 pr-4" href="{% url 'auth:login' %}" title="Employee Login">Employee Login</a>
+			</li>
+
+			<li class="nav-item search-job-tablet active mt-40-px bottom-button">
+				<a title="Search Jobs" class="search-jobs-button nav-link blue-blur color-white border-radius-4 flex-h-center color-white font-14 font-bold full-width" href="" internal-external-search-url="">Search Jobs</a>
+			</li>
+
+			<li class="nav-item search-job-tablet active mt-1 bottom-button employee-logout flex-row flex-v-center login-flow-user-logged-in hide">
+                <span class="full-name">Hello, </span>
+                <a
+                    class="websec-logout flex-row flex-v-center"
+                    href="/logout">
+                    <img src="/resources/jobs/assets/img/icon-logout.svg" alt="Sign Out">
+                    <span>Sign Out</span>
+                </a>
+            </li>
+
+            <li class="nav-item search-job-tablet active mt-1 bottom-button login-flow-user-not-logged-in">
+                <a
+                    class="websec-login nav-link purple color-white border-radius-4 flex-h-center color-white font-14 font-bold full-width"
+                    href="{% url 'auth:login' %}" title="Employee Login">Employee Login</a>
+            </li>
+
+		</ul>
+	</div>
+
+</nav>

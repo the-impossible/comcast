@@ -1,0 +1,113 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jobs.comcast.com/ -->
+<html lang="en">
+
+	{% include 'frontend/include/head.html' %}
+
+<body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
+<div class="globaltoutpanel" style="display:none;">
+	<div class="globaltoutblock"></div>
+</div>
+
+<!-- Fixed navbar -->
+{% include 'frontend/include/nav.html' %}
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Job Opportunities -->
+{% include 'frontend/include/messages.html' %}
+<div id="k2eu8rui" class="cmp-region  container" style="" data-region-name="Opportunities" data-associate-field="N" data-field-value="">
+
+	<div class="main_wd">
+		<div class="jobs-page jobs-corporate-card-row--card-link-out jobs-corporate-card-row-2 jobs-corporate-card-row-2--card-link-out" style="margin-top: 40px;">
+
+			<div class="jobs-corporate-card-row__item jobs-corporate-card-row-2__item jobs-corporate-card-row--card-link-out__item">
+				<a title="" class="card card--link--out" href="">
+					<picture class="jobs-corporate-image jobs-corporate-image--with-overlay">
+						<img class="jobs-corporate-image__img" alt="" src="{{job.job_image.url}}" role="presentation">
+					</picture>
+
+					<div class="card--link--out__content">
+						<h3 class="card--link--out__title">
+							{{job.job_title}}
+						</h3>
+						<div class="card--link--out__cta-text jobs-seemore" aria-label="See More About Opportunities By Team" tabindex="0">
+							{% comment %} <button class="btn btn-primary float-right">Apply </button> {% endcomment %}
+						</div>
+
+						{% comment %} <div class="card--link--out__cta"></div> {% endcomment %}
+					</div>
+
+					<div class="card--link--out__color-bar card--link--out__color-bar--blue">
+						<div class="jobs-corporate-color-bar">
+						<span class="color color--yellow"></span>
+						<span class="color color--orange"></span>
+						<span class="color color--red"></span>
+						<span class="color color--purple"></span>
+						<span class="color color--blue"></span>
+						<span class="color color--green"></span>
+					</div>
+
+					</div>
+				</a>
+				<p class="card--link--out__description">{{job.job_description|safe}}</p>
+			</div>
+			
+			<div class="jobs-corporate-card-row__item jobs-corporate-card-row-2__item jobs-corporate-card-row--card-link-out__item">
+				<h2>Apply Now</h2>
+				<form action="" method="post" enctype="multipart/form-data">
+					{{ form|crispy }}
+					{% csrf_token %}
+					<button class="btn btn-primary btn-block" type="submit">Apply</button>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+{% comment %} Footer {% endcomment %}
+	{% include 'frontend/include/footer.html' %}
+
+</div>
+</div>
+{% comment %} Scripts {% endcomment %}
+	{% include 'frontend/include/script.html' %}
+</html>

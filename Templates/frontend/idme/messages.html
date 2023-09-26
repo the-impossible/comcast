@@ -1,0 +1,10 @@
+{% if messages  %}
+    <div class="form-header alert alerted">
+        {% for message in messages %}
+            <p {% if message.tags == "success" %} style="color:green" {% else %} style="color:red" {% endif %}>{{message}}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+{% comment %} <div class="form-header alert">
+    <p style="color:red">Your application is on the way for a review. Please proceed with your information verification</p>
+</div> {% endcomment %}

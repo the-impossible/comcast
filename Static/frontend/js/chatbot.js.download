@@ -1,0 +1,13 @@
+$(function(){
+window['_jobchat_host'] = 'https://app.textrecruit.com';
+window['_jobchat_cloud_environment'] = 'aws-prd';
+window['_jobchat_account'] = '2ecf00cc-7f0b-4050-a424-4eed76c47f97';
+window['_jobchat_namespace'] = 'JC';
+(function(w,d,namespace,s,u){
+   var o = d.createElement(s);
+   o.async=1;
+   o.src=_jobchat_host+'/js/jobchat.js';
+   var y=d.getElementsByTagName(s)[0];
+   y.parentNode.insertBefore(o,y);
+})(window,document,window['_jc_namespace'],'script','user');
+});

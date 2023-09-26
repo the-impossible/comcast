@@ -1,0 +1,687 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jobs.comcast.com/ -->
+<html lang="en">
+
+	{% include 'frontend/include/head.html' %}
+
+<body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
+<div class="globaltoutpanel" style="display:none;">
+	<div class="globaltoutblock"></div>
+</div>
+
+{% include 'frontend/include/nav.html' %}
+
+<div class="wrapper-container">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2RSM29"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<div class="jobs-page wrapper-content flex-column full-width" id="wrapperContent">
+		<!-- Region Top Panel -->
+		<div id="jq6fnf7d" class="cmp-region  container" style="max-width: none; margin: 0; padding: 0;" data-region-name="Top Panel" data-associate-field="N" data-field-value="">
+
+		<img class="w-100 " style="" data-src="/media/img/original/2023/06/jobs_Header_2023.png" src="{% static 'frontend/img/jobs_Header_2023.png' %}" alt="Comcast employees smiling with text Create the Future with Us">
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.cmp-region[data-associate-field="Y"]').each(function(){
+				var value=$(this).attr("data-field-value");
+				if (value == '' || typeof value == 'undefined'){
+					$(this).hide();
+				}
+		});
+	});
+	</script>
+
+
+	<div id="fake-jobsearch-result" class="jobs-page jobs-search-result hide"></div>
+		<!-- Region Why Comcast -->
+		<div id="k8kd7nux" class="cmp-region  container" style="margin-top:60px; " data-region-name="Why Comcast" data-associate-field="N" data-field-value="">
+		<div style="" class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center ">
+			<div class="flex-column full-width">
+			<p class="un-clickable color-gray-25 jobs-text-text font-20-near-mobile" style=""></p>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Job Opportunities -->
+
+<div id="k2eu8rui" class="cmp-region  container" style="" data-region-name="Opportunities" data-associate-field="N" data-field-value="">
+
+	<div style="" class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center ">
+		<div class="flex-column full-width">
+			<p class="un-clickable color-gray-25 jobs-text-text " style="">
+				Comcast brings together innovative technology and extraordinary entertainment. <b>Here you'll collaborate with diverse and passionate people to help reimagine industries, invent new products, and create incredible experiences.</b> <br><br>
+				The first step to starting your career at Comcast is finding a role that matches your interests, skills, and experience. Let's get started.
+			</p>
+		</div>
+	</div>
+
+	<div class="main_wd">
+		<div class="jobs-page jobs-corporate-card-row jobs-corporate-card-row--card-link-out jobs-corporate-card-row-2 jobs-corporate-card-row-2--card-link-out" style="margin-top: 40px;">
+
+			{% for obj in job_list %}
+				<div class="jobs-corporate-card-row__item jobs-corporate-card-row-2__item jobs-corporate-card-row--card-link-out__item">
+					<a title="" class="card card--link--out" href="{% url 'auth:apply_job' obj.pk %}">
+						<picture class="jobs-corporate-image jobs-corporate-image--with-overlay">
+							<img class="jobs-corporate-image__img" alt="" src="{{obj.job_image.url}}" role="presentation">
+						</picture>
+
+						<div class="card--link--out__content">
+							<h3 class="card--link--out__title">
+								{{obj.job_title}}
+							</h3>
+							{% comment %} <h3 class="card--link--out__description">{{obj.job_description|safe|truncatechars:100}}</h3> {% endcomment %}
+							<div class="card--link--out__cta-text jobs-seemore" aria-label="See More About Opportunities By Team" tabindex="0">
+								<button class="btn btn-primary float-right">See more </button>
+							</div>
+
+							{% comment %} <div class="card--link--out__cta"></div> {% endcomment %}
+						</div>
+
+						<div class="card--link--out__color-bar card--link--out__color-bar--blue">
+							<div class="jobs-corporate-color-bar">
+							<span class="color color--yellow"></span>
+							<span class="color color--orange"></span>
+							<span class="color color--red"></span>
+							<span class="color color--purple"></span>
+							<span class="color color--blue"></span>
+							<span class="color color--green"></span>
+						</div>
+
+						</div>
+					</a>
+				</div>
+
+			{% endfor %}
+
+		</div>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- What You'll Find at Comcast -->
+
+<div id="k24sx0ts" class="cmp-region  container" style="margin-top: 20px;" data-region-name="What You&#39;ll Get Region" data-associate-field="N" data-field-value="">
+
+	<section class="bodycopy bodycopy--noccontainer">
+		<div class="bodycopy__wrapper">
+			<div class="bodycopy__content bodycopy__content--nested">
+				<section aria-label="What You&#39;ll Get Title">
+					<div class=" post-content" style="">
+						<h2 style="text-align: center;">What You'll Find at Comcast</h2>
+					</div>
+				</section>
+			</div>
+		</div>
+	</section>
+
+	<div class="jobs-data-point-set data-point-set">
+		<div class="data-point-set-api" data-set-api="">
+
+			<div id="loader" class="loader hide">
+				Loading......
+			</div>
+
+			<div class="data-point-set__items o-container-grid o-container-grid--cols-4">
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_Values-That-Reflect-Yours2.gif' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Values-That-Reflect-Yours2.gif' %}" media="(min-width: 764px)">
+
+									<img class="image__img" src="{% static 'frontend/img/jobs_Values-That-Reflect-Yours2.gif' %}" srcset="{% static 'frontend/img/jobs_Values-That-Reflect-Yours2.gif' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Values That Reflect Yours<br></span></div>A community that reflects your values + inspires others to make a positive impact.<p></p>
+							</figcaption>
+
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_2.gif' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_2.gif' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_2.gif' %}" srcset="{% static 'frontend/img/jobs_2.gif' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Supportive Team<br></span></div>You'll work with team players who are ready to support you + advocate for your success.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image  ">
+									<source srcset="{% static 'frontend/img/jobs_3.gif' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_3.gif' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_3.gif' %}" srcset="{% static 'frontend/img/jobs_3.gif' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-size: 24px; font-weight: bold;">Career Growth<br></span></div>Vast and varied growth opportunities with the tools and support you need.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_4.gif' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_4.gif' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_4.gif' %}" srcset="{% static 'frontend/img/jobs_4.gif' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Real Impact + Innovation</span></div>The opportunity to be a part of something that impacts millions of lives.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- BENEFITS AND PERKS -->
+<div id="" class="jobs-page jobs-horizontal-rule flex-row flex-row flex-v-center horizontal-section-breaker" style="">
+	<div class="color-bar animate-width" line-color="#F36F22" style="background: rgb(243, 111, 34);"></div>
+	<h2 class="title">BENEFITS AND PERKS</h2>
+</div>
+
+<div id="k24sx0ts" class="cmp-region  container" style="margin-top: 20px;" data-region-name="What You&#39;ll Get Region" data-associate-field="N" data-field-value="">
+
+	<div class="jobs-data-point-set data-point-set">
+		<div class="data-point-set-api" data-set-api="">
+
+			<div id="loader" class="loader hide">
+				Loading......
+			</div>
+
+			<div class="data-point-set__items o-container-grid o-container-grid--cols-4">
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_Medical.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Medical.png' %}" media="(min-width: 764px)">
+
+									<img class="image__img" src="{% static 'frontend/img/jobs_Medical.png' %}" srcset="{% static 'frontend/img/jobs_Medical.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Medical<br></span></div>At Comcast, we care about our employees’ wellbeing—physically, emotionally, and financially, and we work to make sure our employees have access to the benefits they need to support their lives.<p></p>
+							</figcaption>
+
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_401k.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_401k.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_401k.png' %}" srcset="{% static 'frontend/img/jobs_401k.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">401(K) Savings Plan<br></span></div>Save for your future with our 401(k). We offer automatic enrollment along with dollar-for-dollar matching, up to the first 6% of your eligible pay contributed.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image  ">
+									<source srcset="{% static 'frontend/img/jobs_Time-Off.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Time-Off.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_Time-Off.png' %}" srcset="{% static 'frontend/img/jobs_Time-Off.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-size: 24px; font-weight: bold;">Time Off<br></span></div>We know how important it can be to spend time away from work to relax, to recover from illness, or to take time to care for other needs.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_Milestones.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Milestones.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_Milestones.png' %}" srcset="{% static 'frontend/img/jobs_Milestones.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Life Milestones</span></div>From adoption assistance, childcare resources, pet insurance and more, Comcast supports you at all life stages.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div id="k24sx0ts" class="cmp-region  container" style="margin-top: 20px;" data-region-name="What You&#39;ll Get Region" data-associate-field="N" data-field-value="">
+
+	<div class="jobs-data-point-set data-point-set">
+		<div class="data-point-set-api" data-set-api="">
+
+			<div id="loader" class="loader hide">
+				Loading......
+			</div>
+
+			<div class="data-point-set__items o-container-grid o-container-grid--cols-3">
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_XPE.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_XPE.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_XPE.png' %}" srcset="{% static 'frontend/img/jobs_XPE.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Xfinity Promoter Experience<br></span></div>We believe it’s important for our employees to enjoy the same awesome products and experiences we provide our customers.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image  ">
+									<source srcset="{% static 'frontend/img/jobs_Discount-Tickets.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Discount-Tickets.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_Discount-Tickets.png' %}" srcset="{% static 'frontend/img/jobs_Discount-Tickets.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-size: 24px; font-weight: bold;">Discount Tickets<br></span></div>Comcast employees can take advantage of exclusive discounts and special offers at our Universal Resorts, including theme park tickets and onsite hotel rooms.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="data-point-set__item o-container-grid__item">
+					<div class="o-container-grid_item__inner">
+						<figure class="o-figure o-figure--data-point o-figure--image" data-component="data-point" data-role="">
+							<div class="o-figure__image">
+								<picture class="image">
+									<source srcset="{% static 'frontend/img/jobs_Tickets.png' %}" media="(min-width: 1028px)">
+									<source srcset="{% static 'frontend/img/jobs_Tickets.png' %}" media="(min-width: 764px)">
+									<img class="image__img" src="{% static 'frontend/img/jobs_Tickets.png' %}" srcset="{% static 'frontend/img/jobs_Tickets.png' %}" alt="" aria-hidden="true">
+								</picture>
+							</div>
+							<figcaption class="o-figure__caption">
+								<p class="e-type-style--figure-caption-light-large"></p><div><span style="font-weight: bold; font-size: 24px;">Perks and Discounts</span></div>Comcast offers a wide variety of perks and other benefits—including tuition assistance, commuter discounts, voluntary benefits, and discounts to over 700 retailers—to help you in all aspects of your life.<p></p>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div style="margin-top: 30px;" class="jobs-page jobs-quotes flex-column full-width flex-v-center">
+		<p class="text-primary"><u> See more on your contract</u></p>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<div style="margin-top: 30px;" class="jobs-page jobs-quotes flex-column full-width flex-v-center">
+	<img src="{% static 'frontend/img/quote.png' %}">
+	{% comment %} <span class="quotes-icon"></span> {% endcomment %}
+	<span title="Quote" aria-label="Quote" href="javascript:;" class="un-clickable color-gray-25 quotes-text center font-24-near-mobile" style="">Comcast is built on entrepreneurialism, innovation, and integrity where people are passionate about our customers, and about achieving success together.</span>
+
+	<!-- Region Space -->
+	<div id="jpunjd8p" class="cmp-region  container" style="" data-region-name="Space" data-associate-field="N" data-field-value="">
+
+		<div id="" class="jobs-page jobs-horizontal-rule flex-row flex-row flex-v-center horizontal-section-breaker " style="">
+			<div class="color-bar animate-width" line-color="#F36F22" style="background: rgb(243, 111, 34);"></div>
+			<h2 class="title">LATEST STORIES</h2>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Region Latest Stories -->
+
+<div id="kuo4abo6" class="cmp-region  container" style="margin-top:20px; margin-bottom:40px;" data-region-name="Latest Stories" data-associate-field="N" data-field-value="">
+
+<!-- Row Latest Stories Row -->
+<div class="cmp-row row " style="padding: 0 15px; margin-left: 0; margin-right: 0;" data-row-name="Latest Stories Row" data-associate-field="N" data-field-value="">
+
+<!-- Column Story Column 1 -->
+<div class="cmp-column col-xs-6 col-sm-6 col-md-3 col-lg-3 " style="padding: 0;" data-col-name="Story Column 1" data-associate-field="N" data-field-value="">
+
+<div size="Big" class="jobs-page jobs-panel flex-row full-width flex-wrap jobs-panel-big" text-float-to="Center" style="width: auto !important;">
+	<div class="jobs-panel-column-1 line-height-26 text-float-to-center">
+		<span class="font-medium mb-2 remove-if-empty panel-date">
+			September 30, 2021
+		</span>
+
+		<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/stories/entrepreneurial-education-preparing-todays-students-for-tomorrows-challenges">
+			<span>An Entrepreneurial Education is the Key to Preparing Today’s Students for Tomorrow’s Challenges</span>
+		</a>
+
+		<a class="color-light-blue mt-2" href="https://jobs.comcast.com/" title="" target="_blank">
+			Learn More
+			<img class="ml-2" src="{% static 'frontend/img/icon-arrow-next-blue.svg' %}" width="14">
+		</a>
+	</div>
+
+	<div class="relative jobs-panel-column-2 flex-column flex-end flex-v-h-center text-float-to-center" borderbottomcolor="#1789CA" style="border-bottom: 5px solid rgb(23, 137, 202);">
+		<!-- TODO: Remove the input-panel-image-url field and the "else" part of the block below, if no Document is using the URL field directly -->
+
+		<img class="image__img" src="{% static 'frontend/img/jobs_corporate_v2-Web-Publishing_BUILDOpEd_16x9_Social.jpg' %}" role="presentation" aria-hidden="true" alt="">
+
+		<a href="https://corporate.comcast.com/stories/entrepreneurial-education-preparing-todays-students-for-tomorrows-challenges" class="wrap-all" aria-label=" benefits">
+		</a>
+	</div>
+
+	<div class="jobs-panel-column-3 line-height-26 mt-2 text-float-to-center">
+		<span class="font-medium mb-2 remove-if-empty panel-date">
+			September 30, 2021
+		</span>
+		<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/stories/entrepreneurial-education-preparing-todays-students-for-tomorrows-challenges">
+			<span>An Entrepreneurial Education is the Key to Preparing Today’s Students for Tomorrow’s Challenges</span>
+		</a>
+	</div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-column[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Column Story Column 2 -->
+<div class="cmp-column col-xs-6 col-sm-6 col-md-3 col-lg-3 " style="padding: 0;" data-col-name="Story Column 2" data-associate-field="N" data-field-value="">
+
+	<div size="Big" class="jobs-page jobs-panel flex-row full-width flex-wrap jobs-panel-big" text-float-to="Center" style="width: auto !important;">
+
+		<div class="jobs-panel-column-1 line-height-26 text-float-to-center">
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 23, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/stories/comcast-nbcuniversal-named-a-fortune-best-workplace-for-women">
+				<span>Comcast NBCUniversal Named a Top Workplace for Women</span>
+			</a>
+
+			<a class="color-light-blue mt-2" href="https://jobs.comcast.com/" title="" target="_blank">
+				Learn More
+				<img class="ml-2" src="{% static 'frontend/img/icon-arrow-next-blue.svg' %}" width="14">
+			</a>
+		</div>
+
+		<div class="relative jobs-panel-column-2 flex-column flex-end flex-v-h-center text-float-to-center" borderbottomcolor="#FDB816" style="border-bottom: 5px solid rgb(253, 184, 22);">
+			<!-- TODO: Remove the input-panel-image-url field and the "else" part of the block below, if no Document is using the URL field directly -->
+
+			<img class="image__img" src="{% static 'frontend/img/jobs_corporate_WebPublishing_100BestWorkplacesWomen_2021_16x9_Thumbnail.jpg' %}" role="presentation" aria-hidden="true" alt="">
+
+			<a href="https://corporate.comcast.com/stories/comcast-nbcuniversal-named-a-fortune-best-workplace-for-women" class="wrap-all" aria-label=" benefits">
+			</a>
+
+		</div>
+
+		<div class="jobs-panel-column-3 line-height-26 mt-2 text-float-to-center">
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 23, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/stories/comcast-nbcuniversal-named-a-fortune-best-workplace-for-women">
+				<span>Comcast NBCUniversal Named a Top Workplace for Women</span>
+			</a>
+
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-column[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Column Story Column 3 -->
+<div class="cmp-column col-xs-6 col-sm-6 col-md-3 col-lg-3 " style="padding: 0;" data-col-name="Story Column 3" data-associate-field="N" data-field-value="">
+
+	<div size="Big" class="jobs-page jobs-panel flex-row full-width flex-wrap jobs-panel-big" text-float-to="Center" style="width: auto !important;">
+		<div class="jobs-panel-column-1 line-height-26 text-float-to-center">
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 15, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/press/releases/nbcuniversal-telemundo-bilingual-hispanic-heritage-month-campaign-come-with-us">
+				<span>NBCUniversal and Telemundo Launch Its First Ever Bilingual Hispanic Heritage Month Campaign ‘Come With Us’</span>
+			</a>
+
+			<a class="color-light-blue mt-2" href="https://jobs.comcast.com/" title="" target="_blank">
+			Learn More
+				<img class="ml-2" src="{% static 'frontend/img/icon-arrow-next-blue.svg' %}" width="14">
+			</a>
+
+		</div>
+
+		<div class="relative jobs-panel-column-2 flex-column flex-end flex-v-h-center text-float-to-center" 					borderbottomcolor="#C9224B" style="border-bottom: 5px solid rgb(201, 34, 75);">
+		<!-- TODO: Remove the input-panel-image-url field and the "else" part of the block below, if no Document is using the URL field directly -->
+
+			<img class="image__img" src="{% static 'frontend/img/jobs_corporate_Web-Publishing_NBCU_Telemundo_HHM_16x9_Social.jpg' %}" role="presentation" aria-hidden="true" alt="">
+
+			<a href="https://corporate.comcast.com/press/releases/nbcuniversal-telemundo-bilingual-hispanic-heritage-month-campaign-come-with-us" class="wrap-all" aria-label=" benefits">
+			</a>
+
+		</div>
+
+		<div class="jobs-panel-column-3 line-height-26 mt-2 text-float-to-center">
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 15, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/press/releases/nbcuniversal-telemundo-bilingual-hispanic-heritage-month-campaign-come-with-us">
+				<span>NBCUniversal and Telemundo Launch Its First Ever Bilingual Hispanic Heritage Month Campaign ‘Come With Us’</span>
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-column[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Column Story Column 4 -->
+<div class="cmp-column col-xs-6 col-sm-6 col-md-3 col-lg-3 " style="padding: 0;" data-col-name="Story Column 4" data-associate-field="N" data-field-value="">
+
+	<div size="Big" class="jobs-page jobs-panel flex-row full-width flex-wrap jobs-panel-big" text-float-to="Center" style="width: auto !important;">
+		<div class="jobs-panel-column-1 line-height-26 text-float-to-center">
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 14, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/press/releases/comcast-rise-commits-11-million-grants-small-business-owners-of-color-advance-equitable-economic-mobility">
+				<span>Comcast RISE Commits $11M In Grants to Small Business Owners of Color In Ongoing Effort to Advance Economic Mobility</span>
+			</a>
+
+			<a class="color-light-blue mt-2" href="https://jobs.comcast.com/" title="" target="_blank">
+			Learn More
+				<img class="ml-2" src="{% static 'frontend/img/icon-arrow-next-blue.svg' %}" width="14">
+			</a>
+		</div>
+
+		<div class="relative jobs-panel-column-2 flex-column flex-end flex-v-h-center text-float-to-center" borderbottomcolor="#6460AB" style="border-bottom: 5px solid rgb(100, 96, 171);">
+		<!-- TODO: Remove the input-panel-image-url field and the "else" part of the block below, if no Document is using the URL field directly -->
+
+			<img class="image__img" src="{% static 'frontend/img/jobs_corporate_Web-Publishing_ComcastRISE6Mil_16x9_Social.jpg' %}" role="presentation" aria-hidden="true" alt="">
+
+			<a href="https://corporate.comcast.com/press/releases/comcast-rise-commits-11-million-grants-small-business-owners-of-color-advance-equitable-economic-mobility" class="wrap-all" aria-label=" benefits">
+					</a>
+		</div>
+
+		<div class="jobs-panel-column-3 line-height-26 mt-2 text-float-to-center">
+
+			<span class="font-medium mb-2 remove-if-empty panel-date">
+				September 14, 2021
+			</span>
+
+			<a class=" font-medium" style="color: #252525 !important; " href="https://corporate.comcast.com/press/releases/comcast-rise-commits-11-million-grants-small-business-owners-of-color-advance-equitable-economic-mobility">
+				<span>Comcast RISE Commits $11M In Grants to Small Business Owners of Color In Ongoing Effort to Advance Economic Mobility</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-column[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-row[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+{% comment %} Footer {% endcomment %}
+	{% include 'frontend/include/footer.html' %}
+
+</div>
+</div>
+{% comment %} Scripts {% endcomment %}
+	{% include 'frontend/include/script.html' %}
+</html>

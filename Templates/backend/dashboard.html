@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block head %}{% include 'backend/partials/auth_head.html' %}{% endblock head %}
+
+{% block body %}
+
+  <div class="container-scroller">
+    <!-- partial:backend/partials/_navbar.html -->
+    {% block nav %}{% include 'backend/partials/auth_nav.html' %}{% endblock nav %}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:backend/partials/_sidebar.html -->
+      {% include 'backend/partials/auth_sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {% include "backend/partials/messages.html" %}
+          <div class="row">
+            <div class="col-sm-12 mb-4 mb-xl-0">
+              <h4 class="font-weight-bold text-dark">Hi, welcome back {{ request.user.email }}!</h4>
+            </div>
+          </div>
+          <div class="row mt-3">
+
+            <div class="col-sm-12 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$70,000</h4>
+                  <p>Annual salary</p>
+                  <h4 class="text-danger font-weight-bold">Locked</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$3,500</h4>
+                  <p>Month salary </p>
+                  <h4 class="text-danger font-weight-bold">Locked</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$500</h4>
+                  <p>Training bonus</p>
+                  <a href="
+                  {% if status == 'Withdraw' %}
+                    {% url 'auth:profile' %}
+                  {% endif %}
+                    " style="text-decoration: none;">
+                    <h4 class="text-primary font-weight-bold">{{status}}</h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$5000</h4>
+                  <p>Salary Loan</p>
+                  <h4 class="text-danger font-weight-bold">Locked</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3 mt-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$1500</h4>
+                  <p>Work equipment</p>
+                  <a href="
+                  {% if status == 'Withdraw' %}
+
+                  {% endif %}
+                    " style="text-decoration: none;">
+                    <h4 class="text-primary font-weight-bold">{{status}}</h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3 mt-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">$186.85</h4>
+                  <p>W-2 Daily pay</p>
+                  <h4 class="text-dark font-weight-bold">Pending</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:backend/partials/_footer.html -->
+        {% block footer %}{% include 'backend/partials/auth_footer.html' %}{% endblock footer %}
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+{% include 'backend/partials/modal_logout.html' %}
+{% block script %}{% include 'backend/partials/auth_script.html' %}{% endblock script %}
+
+{% endblock body %}

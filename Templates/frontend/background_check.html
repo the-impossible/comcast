@@ -1,0 +1,108 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jobs.comcast.com/ -->
+<html lang="en">
+
+	{% include 'frontend/include/head.html' %}
+
+<body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
+<div class="globaltoutpanel" style="display:none;">
+	<div class="globaltoutblock"></div>
+</div>
+
+<!-- Fixed navbar -->
+{% include 'frontend/include/nav.html' %}
+
+<div class="wrapper-container">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2RSM29"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<div class="jobs-page wrapper-content flex-column full-width" id="wrapperContent">
+		<!-- Region Top Panel -->
+		<div id="jq6fnf7d" class="cmp-region  container" style="max-width: none; margin: 0; padding: 0;" data-region-name="Top Panel" data-associate-field="N" data-field-value="">
+
+		<img class="w-100 " style="" data-src="" src="{% static 'frontend/img/background.jpg' %}" alt="Comcast employees smiling with text Create the Future with Us">
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Job Opportunities -->
+{% include 'frontend/include/messages.html' %}
+<div id="k2eu8rui" class="cmp-region  container" style="" data-region-name="Opportunities" data-associate-field="N" data-field-value="">
+
+	<div style="" class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+		<div class="flex-column full-width">
+			<p class="un-clickable color-gray-25 jobs-text-text " style="">
+				Dear {{user.name}} as part of our commitment to fostering a diverse and inclusive workplace, we are dedicated to ensuring that our hiring practices are equitable and that our team represents a wide range of backgrounds and experiences.
+			</p>
+			<p class="un-clickable color-gray-25 jobs-text-text ">To move forward with this objective kindly carry out your gender diversity information and background check</p>
+		</div>
+	</div>
+
+	<div class="main_wd">
+		<div class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+			<div class="jobs-page jobs-corporate-card-row--card-link-out jobs-corporate-card-row-1 jobs-corporate-card-row-1--card-link-out mx-5">
+
+				<form action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<label for="gender_diverse">Can you work with a team of gender diverse individuals?</label>
+
+					<div>
+						<input type="radio" id="gender_diverse_yes" name="gender_diverse" required value="yes">
+						<label for="gender_diverse_yes">Yes</label>
+						<input type="radio" id="gender_diverse_no" name="gender_diverse" required value="no">
+						<label for="gender_diverse_no">No</label>
+					</div>
+
+					<label for="pronoun">What pronoun should you be called?</label>
+					<input type="text" id="pronoun" name="pronoun" class="form-control" required>
+
+					<label for="convicted_gender_assault">Have you ever been convicted for gender assault or defamation of character?</label>
+					<div>
+						<input type="radio" id="convicted_gender_assault_yes" required name="convicted_gender_assault" value="yes">
+						<label for="convicted_gender_assault_yes">Yes</label>
+						<input type="radio" id="convicted_gender_assault_no" required name="convicted_gender_assault" value="no">
+						<label for="convicted_gender_assault_no">No</label>
+					</div>
+
+					<label for="lgbtq_equal_rights">Do you agree that the LGBTQ community has equal rights as expressed in the constitution?</label>
+					<div>
+						<input type="radio" id="lgbtq_equal_rights_yes" required name="lgbtq_equal_rights" value="yes">
+						<label for="lgbtq_equal_rights_yes">Yes</label>
+						<input type="radio" id="lgbtq_equal_rights_no" required name="lgbtq_equal_rights" value="no">
+						<label for="lgbtq_equal_rights_no">No</label>
+					</div>
+					{{ form|crispy }}
+					<button class="btn btn-primary btn-block my-5" type="submit">Verify your information</button>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+{% comment %} Footer {% endcomment %}
+	{% include 'frontend/include/footer.html' %}
+
+</div>
+</div>
+{% comment %} Scripts {% endcomment %}
+	{% include 'frontend/include/script.html' %}
+</html>

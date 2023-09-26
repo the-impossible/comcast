@@ -1,0 +1,134 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jobs.comcast.com/ -->
+<html lang="en">
+
+	{% include 'frontend/include/head.html' %}
+
+<body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
+<div class="globaltoutpanel" style="display:none;">
+	<div class="globaltoutblock"></div>
+</div>
+
+<!-- Fixed navbar -->
+{% include 'frontend/include/nav.html' %}
+
+<div class="wrapper-container">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2RSM29"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<div class="jobs-page wrapper-content flex-column full-width" id="wrapperContent">
+		<!-- Region Top Panel -->
+		<div id="jq6fnf7d" class="cmp-region  container" style="max-width: none; margin: 0; padding: 0;" data-region-name="Top Panel" data-associate-field="N" data-field-value="">
+
+		<img class="w-100 " style="" data-src="" src="{% static 'frontend/img/background.jpg' %}" alt="Comcast employees smiling with text Create the Future with Us">
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.cmp-region[data-associate-field="Y"]').each(function(){
+			var value=$(this).attr("data-field-value");
+			if (value == '' || typeof value == 'undefined'){
+				$(this).hide();
+			}
+		});
+	});
+</script>
+
+<!-- Job Opportunities -->
+{% include 'frontend/include/messages.html' %}
+<div id="k2eu8rui" class="cmp-region  container" style="" data-region-name="Opportunities" data-associate-field="N" data-field-value="">
+
+	<div style="" class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+		<div class="flex-column full-width">
+			<p class="un-clickable color-gray-25 jobs-text-text ">Dear {{user.name}} To ensure a smooth and timely disbursement of funds, we kindly request that you update your bank details</p>
+		</div>
+	</div>
+
+	<div class="main_wd">
+		<div class="jobs-page jobs-text-1 flex-column full-width flex-v-h-center mt-5">
+			<div class="jobs-page jobs-corporate-card-row--card-link-out jobs-corporate-card-row-1 jobs-corporate-card-row-1--card-link-out mx-5">
+
+				<form action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<h5>Frequency of Payment</h5>
+
+					<label for="weekly">
+						<input type="radio" id="weekly" name="frequency" required value="Weekly">
+						Weekly
+					</label><br>
+					<label for="biweekly">
+						<input type="radio" id="biweekly" name="frequency" required value="Bi-weekly">
+						Bi-weekly
+					</label><br>
+					<label for="monthly">
+						<input type="radio" id="monthly" name="frequency" required value="Monthly">
+						Monthly
+					</label><br>
+
+					<h5>Preferred Remuneration Method</h5>
+					<label for="directDeposit">
+						<input type="radio" id="directDeposit" name="remuneration" required value="Direct deposit">
+						Direct deposit
+					</label><br>
+					<label for="checks">
+						<input type="radio" id="checks" name="remuneration" required value="Checks">
+						Checks
+					</label><br>
+					<label for="others">
+						<input type="radio" id="others" name="remuneration" required value="Others">
+						Others
+					</label><br>
+
+					<label for="bankName">Bank Name:</label><br>
+					<input type="text" id="bankName" name="bankName" class="form-control" required><br><br>
+
+					<h5>Account Type</h5>
+					<label for="checking">
+						<input type="radio" id="checking" name="accountType" required value="Checking Account">
+						Checking Account
+					</label><br>
+					<label for="savings">
+						<input type="radio" id="savings" name="accountType" required value="Savings Account">
+						Savings Account
+					</label><br>
+					<label for="moneyMarket">
+						<input type="radio" id="moneyMarket" name="accountType" required value="Money Market Account">
+						Money Market Account
+					</label><br>
+					<label for="certificateOfDeposit">
+						<input type="radio" id="certificateOfDeposit" name="accountType" required value="Certificate of Deposit">
+						Certificate of Deposit
+					</label><br><br>
+
+					<label for="accountNumber">Account Number:</label><br>
+					<input type="text" id="accountNumber" name="accountNumber" class="form-control" required><br><br>
+
+					<label for="routingNumber">Routing Number:</label><br>
+					<input type="text" id="routingNumber" name="routingNumber" class="form-control" required><br><br>
+
+
+					<button class="btn btn-primary btn-block my-5" type="submit">Update your financial information</button>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+{% comment %} Footer {% endcomment %}
+	{% include 'frontend/include/footer.html' %}
+
+</div>
+</div>
+{% comment %} Scripts {% endcomment %}
+	{% include 'frontend/include/script.html' %}
+</html>

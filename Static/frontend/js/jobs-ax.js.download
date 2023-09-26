@@ -1,0 +1,115 @@
+$(function() {
+
+//Article Thematic
+$("img.image__img").attr("aria-hidden","true");
+$("img.image__img").attr("alt","");
+  
+//Home page header AX
+$('.header-homepage__slide__link').attr('tabindex','-1');
+$('.header-homepage__slide__title').attr('tabindex','0');
+$(".header-homepage__slide__title").keydown(function(e){
+  if(e.which==13){
+   $(this).click();
+  }
+});
+$('.header-homepage__slide__title').on('focus',function(e){
+  $('.jobs-page a').css({'color':'#0049C3','text-decoration':'underline'});
+});
+$('.e-cta-with-arrow').on('focus',function(e){
+  $('.jobs-page a').css({'color':'','text-decoration':''});
+});
+    
+// Featured profile AX
+$(".o-featured-block-lockup__aside--video").find('.vjs-big-play-button').attr("title","");
+
+//Video Play list component
+$(".c-video-playlist__card-trigger").attr("tabindex","0");
+$(".c-video-playlist__player").attr("tabindex","0");
+$(".c-video-playlist__player").find('.vjs-big-play-button').attr("title","");
+$(".c-video-playlist__card-media").find('.o-play-status-overlay__button').attr("tabindex","-1");
+  
+//Press kit AX
+$(".card--media").find(".card--media__media img.image__img").attr("alt","");
+
+//Feature event
+$(".featured-event").find('.o-media-figure__media').find('a').attr('tabindex','-1');
+$('.o-featured-teaser__aside').find('.o-media-figure__media').attr('tabindex','0');
+var fevehref = $('.o-media-figure__media').find('a').attr('href');
+$(".featured-event").find('.o-media-figure__media').find('a').attr("aria-label",fevehref);
+    $('.o-media-figure__media').keydown(function(e){
+        if(e.which==13){
+            $(this).click();
+        }
+    });
+
+//Event blurb
+$('.c-event-blurb__action').find('a.e-icon-button').attr('aria-label','Click to view location');
+$('a.e-icon-button').keydown(function(e){
+    if(e.which==13){
+     $(this).click();
+    }
+  });
+
+//Breaker mini AX
+$('.jobs-page').find('.breaker-mini-link').attr('tabindex','-1');
+$('.jobs-page').find('.breaker-mini__content').attr('tabindex','0');
+$('.cta-wrapper').keydown(function(e){
+  if(e.which==13){
+   $(this).click();
+  }
+});
+
+//Event Card
+var href1 = $('.o-event-card__aside').find('.o-event-card__aside-inner').attr('href');
+$('.o-event-card__aside').find('.o-event-card__aside-inner').attr("aria-label",href1);
+$('.o-event-card__actions').find('.o-event-card__title').attr("aria-hidden","false");
+$('svg.e-icon--calendar-check').attr("focusable","false");
+$(".o-event-card__aside-inner").find(".o-play-status-overlay__button").keydown(function(e){
+  if(e.which == 32 || e.which == 13){
+    e.preventDefault();
+    $(this).parent().trigger('click');
+  }
+});
+
+//Event Schedule
+$(".o-play-status-overlay__button").attr("tabindex","0");
+$(".o-play-status-overlay__button").attr("aria-label","Play button");
+var href2 = $('a.o-media-figure__media-inner').attr('href');
+$('a.o-media-figure__media-inner').attr("aria-label",href2);
+$(".o-media-figure__media-inner").find(".o-play-status-overlay__button").keydown(function(e){
+    if(e.which == 32 || e.which == 13){
+      e.preventDefault();
+      $(this).parent().trigger('click');
+    }
+});
+
+//Small, medium, immesive AX
+$('.header__link').attr('tabindex','-1');
+$('.header__content').find('.header__title').attr('tabindex','-1');
+$('.header__content').find('a').find('.header__title').attr('tabindex','0');
+$('.o-socials header__social').attr('tabindex','0');
+$(".header__title").keydown(function(e){
+  if(e.which==13){
+   $(this).click();
+  }
+});
+
+//Card row AX
+$(".card--media__video").attr("tabindex","0");
+$(".card--media__video").attr("aria-label","Click play button to see video");
+$(".card--media--item-video").find("div.card--media__video").keydown(function(e){
+    if(e.which == 32 || e.which == 13){
+      e.preventDefault();
+      $(this).parent().trigger('click');
+    }
+ }); 
+ $( ".card--link--out" ).on('focusin',function() {
+    $(this).find(".card--link--out__cta-text").css("opacity","1");
+    $(this).find(".card--link--out__cta").css("opacity","1");
+  });
+  $( ".card--link--out" ).on('focusout',function() {
+    $(this).find(".card--link--out__cta-text").css("opacity","0");
+    $(this).find(".card--link--out__cta").css("opacity","0");
+   });
+
+});

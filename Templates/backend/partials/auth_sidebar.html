@@ -1,0 +1,31 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="user-profile">
+      <div class="user-name">
+          {{ request.user }}
+      </div>
+    </div>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth:dashboard' %}">
+          <i class="icon-box menu-icon"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth:profile' %}">
+          <i class="icon-head menu-icon"></i>
+          <span class="menu-title">Profile</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#basicModal" style="cursor: pointer;">
+          <i class="icon-inbox menu-icon"></i>
+          <span class="menu-title">Logout</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>

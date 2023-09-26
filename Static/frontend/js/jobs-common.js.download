@@ -1,0 +1,1667 @@
+
+// All customer function
+
+var UID = {
+  _current: 0,
+  getNew: function(){
+    this._current++;
+    return this._current;
+  }
+};
+var ESC_MAP = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#x27;',
+  "/": '&#x2F;'
+};
+
+function escapeHTML(s, forAttribute) {
+  return s.replace(forAttribute ? /[&<>"'/]/g : /[&<>"'/]/g, function(c) {
+      return ESC_MAP[c];
+  });
+}
+
+function removeScriptTagsInjected(input){
+  const regex = /%3Cscript.*?%3E.*?\/script%3E/igm;
+  const subst = ``;
+  //while the value is not null, strip the <script> tags
+  try{
+      if((input.length !== null || 0)){
+          return input.replace(regex, subst);
+       }
+       else {
+         return '';
+       }
+  }
+  catch(e){
+      console.error("Error:", e);
+  } 
+}
+
+// Polyfill for includes
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+
+// pseudoStyle use for setting some special css properties like before after
+HTMLElement.prototype.pseudoStyle = function(element,prop,value){
+  var _this = this;
+  var _sheetId = "pseudoStyles";
+  var _head = document.head || document.getElementsByTagName('head')[0];
+  var _sheet = document.getElementById(_sheetId) || document.createElement('style');
+  _sheet.id = _sheetId;
+  var className = "pseudoStyle" + UID.getNew();
+  
+  _this.className +=  " "+className; 
+  
+  _sheet.innerHTML += " ."+className+":"+element+"{"+prop+":"+value+"}";
+  _head.appendChild(_sheet);
+  return this;
+};
+
+// Insert a string at a specific index
+String.prototype.splice = function(idx, rem, str) {
+  return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+};
+
+/**
+ * detect IE
+ * returns version of IE or false, if browser is not Internet Explorer
+ */
+function detectIE() {
+  var ua = window.navigator.userAgent;
+
+  var msie = ua.indexOf('MSIE ');
+  if (msie > 0) {
+    // IE 10 or older => return version number
+    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+  }
+
+  var trident = ua.indexOf('Trident/');
+  if (trident > 0) {
+    // IE 11 => return version number
+    var rv = ua.indexOf('rv:');
+    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+  }
+
+  // var edge = ua.indexOf('Edge/');
+  // if (edge > 0) {
+  //   // Edge (IE 12+) => return version number
+  //   return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+  // }
+
+  // other browser
+  return false;
+}
+
+function isImage(url) {
+  return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
+
+/**
+ * swap between key and value
+ * @param {*} json : json object
+ */
+function swap(json){
+  var ret = {};
+  for(var key in json){
+    ret[json[key]] = key;
+  }
+  return ret;
+}
+
+/**
+ * swape between key and value with value tranform to upper key
+ * @param {*} json : json object
+ */
+function swapToUpperKey(json){
+  var ret = {};
+  for(var key in json){
+    ret[json[key].toUpperCase()] = key;
+  }
+  return ret;
+}
+
+/**
+ * check if element is scroll to bottom
+ * @param {*} elem : dom element
+ */
+function isScrollToBottom(elem) {
+  if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+      return true;
+  }
+  return false;
+}
+
+/**
+ * check if element is in viewport
+ * @param {*} elem : dom element
+ */
+function isElementInViewport(elem) {
+  if (!(elem) || ($(elem).length === 0)) {
+    return false;
+  }
+  var top_of_element = elem.offset().top;
+  var bottom_of_element = elem.offset().top + elem.outerHeight();
+  var bottom_of_screen = $(window).scrollTop() + window.innerHeight;
+  var top_of_screen = $(window).scrollTop();
+  if((bottom_of_screen > top_of_element) && (top_of_screen <= bottom_of_element)){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+/**
+ * format long number with commas
+ * @param {*} x : number
+ */
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/**
+ * check if variable is string
+ * @param {string} str 
+ */
+function isString(str) {
+  if (typeof str === 'string' || str instanceof String) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * strip html to string
+ * @param {*} html : htlm string
+ */
+function stripHtml(html)
+{
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
+
+// For checkbox
+function registerCheckbox(element) {
+  var checkedValue = element.val();
+  if (checkedValue) {
+    element.prop("checked", true);
+  }
+  element.change(function () {
+    // this will contain a reference to the checkbox   
+    if (this.checked) {
+      $(this).val('true');
+    } else {
+      $(this).val('');
+    }
+  });
+}
+
+/**
+ * Get the URL parameters
+ * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+ * @param  {String} url The URL
+ * @return {Object}     The URL parameters
+ */
+function getUrlParameters(url) {
+  if (!url) {
+    url = window.location.href;
+  }
+	var params = {};
+	var parser = document.createElement('a');
+	parser.href = url;
+	var query = parser.search.substring(1);
+	var vars = query.split('&');
+	for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		params[pair[0]] = decodeURIComponent(pair[1]);
+	}
+	return params;
+};
+
+/**
+ * get parameter from url
+ * @param {*} name : name of param
+ */
+function getUrlParameter(url, name) {
+  if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+
+
+    if (!results) return null;
+    if (!results[2]) return '';
+    //remove <script> tags
+    var cleanedStr= removeScriptTagsInjected(results[2]);
+
+    cleanedStr = decodeURIComponent(cleanedStr.replace(/\+/g, " "));
+
+      
+    //Escape HTML with Escape_Map
+    cleanedStr =  escapeHTML(cleanedStr);
+
+    //SANITIZE DECODED ITEM
+    var returnVal = decodeURIComponent(cleanedStr);
+    return returnVal;
+}
+
+/**
+ * remove parameter from url
+ * @param {key name in parameter} name 
+ */
+function removeParameterFromURL(sourceURL, name) {
+  if (!sourceURL) {
+    sourceURL = window.location.href;
+  }
+  var rtn = sourceURL.split("?")[0],
+      param,
+      params_arr = [],
+      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+  if (queryString !== "") {
+      params_arr = queryString.split("&");
+      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+          param = params_arr[i].split("=")[0];
+          if (param === name) {
+              params_arr.splice(i, 1);
+          }
+      }
+      rtn = rtn + "?" + params_arr.join("&");
+  }
+  if (rtn && (rtn[rtn.length -1] === '&' || rtn[rtn.length -1] === '?')) {
+    rtn = rtn.slice(0, -1);
+  }
+  return rtn;
+}
+
+/**
+ * get child of array base on paginating
+ * @param {array of element} array 
+ * @param {page size} page_size 
+ * @param {page index} page_number 
+ */
+function paginate (array, page_size, page_number) {
+  --page_number; // because pages logically start with 1, but technically with 0
+  return array.slice(page_number * page_size, (page_number + 1) * page_size);
+}
+
+/**
+ * capitalize first letter
+ * @param {string} string 
+ */
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * open new tab
+ * @param {url} url 
+ */
+function openInNewTab(url) {
+  var win = window.open(url, '_blank', 'noopener,resizable,scrollbars');
+  
+  win.focus();
+}
+
+/**
+ * open in this tab
+ * @param {url} url 
+ */
+function openInThisTab(url) {
+  var win = window.open(url, "_self", 'noopener,resizable,scrollbars');
+  win.focus();
+}
+
+// Web Storage Objects
+function removeAllWebStorageObjects() {
+  sessionStorage.clear();
+  localStorage.clear();
+}
+
+function isJson(item) {
+  item = typeof item !== "string"
+      ? JSON.stringify(item)
+      : item;
+
+  try {
+      item = JSON.parse(item);
+  } catch (e) {
+      return false;
+  }
+
+  if (typeof item === "object" && item !== null) {
+      return true;
+  }
+
+  return false;
+}
+
+function saveSectionStorage(key, data) {
+  if (typeof(Storage) !== "undefined") {
+    if (!data) {
+      sessionStorage.removeItem(key);
+    } else if (typeof data === 'object') {
+      sessionStorage.setItem(key, JSON.stringify(data));
+    } else {
+      sessionStorage.setItem(key, data);
+    }
+  } else {
+    console.log('Sorry! No Web Storage support..');
+  }
+}
+function getSectionStorage(key) {
+  if (typeof(Storage) !== "undefined") {
+    var data = sessionStorage.getItem(key);
+    if (isJson(data)) {
+      return JSON.parse(data);
+    } else {
+      return data;
+    }
+  } else {
+    console.log('Sorry! No Web Storage support..');
+  }
+  return null;
+}
+
+function saveLocalStorage(key, data) {
+  if (typeof(Storage) !== "undefined") {
+    if (!data) {
+      localStorage.removeItem(key);
+    } else if (typeof data === 'object') {
+      localStorage.setItem(key, JSON.stringify(data));
+    } else {
+      localStorage.setItem(key, data);
+    }
+  } else {
+    console.log('Sorry! No Web Storage support..');
+  }
+}
+
+function getLocalStorage(key) {
+  if (typeof(Storage) !== "undefined") {
+    var data = localStorage.getItem(key);
+    if (isJson(data)) {
+      return JSON.parse(data);
+    } else {
+      return data;
+    }
+  } else {
+    console.log('Sorry! No Web Storage support..');
+  }
+  return null;
+}
+
+/**
+ * insertP arameter to Url
+ * @param {url} url 
+ * @param {params} params
+ */
+function insertParametertoUrl(url, params) {
+  if (params && url) {
+    var queryString = Object.keys(params).map(function(key) {
+      return key + '=' + params[key]
+    }).join('&');
+    if (url.indexOf('?') < 0) {
+      return url + '?' + queryString;
+    }
+    return url + '&' + queryString;
+  }
+  return url;
+}
+
+
+  // Retrieves JSON from an after element content.
+  // Remember to assign the after element a value in the form of:
+  // ```
+  //   [data-attribute='your-clear-name']::after {
+  //     content: '{ "settings": { "key": "value" } }';
+  //   }
+  // ```
+function cssLocals(el) {
+  return JSON.parse(
+    window
+      .getComputedStyle(el, ':after')
+      .getPropertyValue('content')
+      .replace(/\\/g, '')
+      .replace(/^"(.*)"$/g, '$1')
+  );
+}
+
+function  getViewportValues() {
+  return {
+    top: window.pageYOffset,
+    middle: window.pageYOffset + window.innerHeight / 2,
+    bottom: window.pageYOffset + window.innerHeight,
+    height: window.innerHeight
+  };
+}
+
+function  getItemOffsets(el){
+  return {
+    top: $(el).offset().top,
+    middle: $(el).offset().top + $(el).outerHeight() / 2,
+    bottom: $(el).offset().top + $(el).outerHeight(),
+    height: $(el).outerHeight()
+  };
+} 
+
+function isInViewport(el){
+  var bounding = el.getBoundingClientRect();
+  return (
+    bounding.top >= 0 &&
+    bounding.left >= 0 &&
+    bounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    bounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+function throttle(fn, wait) {
+  let time = Date.now();
+  return function() {
+    if (time + wait - Date.now() < 0) {
+      fn();
+      time = Date.now();
+    }
+  };
+}
+
+function getComputedHeight(value) {
+  const $testDiv = $(
+    '<div style="width: 100%; height: ' + value + '; visibility: hidden; position: absolute; left: -200%; z-index: -100;">'
+  );
+  var height = 0;
+  $('body').append($testDiv);
+  height = $testDiv.outerHeight();
+  $testDiv.remove();
+  return height;
+}
+
+function cssTranslateY(offset) {
+  return {
+    '-webkit-transform': 'translateY(' + offset + ')',
+    '-moz-transform': 'translateY(' + offset + ')',
+    '-ms-transform': 'translateY(' + offset + ')',
+    '-o-transform': 'translateY(' + offset + ')',
+    transform: 'translateY(' + offset + ')'
+  }
+}
+
+function getDataOption(property) {
+  return JSON.parse($('[data-options]').attr('data-options'))[property];
+}
+
+function allImgLoaded(parent) {
+  // eslint-disable-next-line no-undef, no-unused-vars
+  return new Promise(function(resolve, reject) {
+    const $imgs = $(parent).find('img');
+    // Total images is still the total number of <img> elements on the page.
+    const totalImages = $imgs.length;
+    // Images loaded is zero because we're going to process a new set of images.
+    var imagesLoaded = 0;
+
+    // Do exactly as we had before -- increment the loaded count and if all are
+    // loaded, call the allImagesLoaded() function.
+    const imageLoaded = function() {
+      imagesLoaded++;
+
+      if (imagesLoaded == totalImages) {
+        resolve('all images loaded');
+      }
+    };
+
+    // Step through each image in the DOM, clone it, attach an onload event
+    // listener, then set its source to the source of the original image. When
+    // that new image has loaded, fire the imageLoaded() callback.
+    $imgs.each(function(i, img) {
+      $('<img>')
+        .on('load', imageLoaded)
+        .on('error', function() {
+          reject('Error when loading image');
+        })
+        .attr('src', $(img).attr('src'));
+    });
+  });
+}
+
+function hashString(string) {
+  var hash = 0,
+    i,
+    chr;
+  if (string.length === 0) return hash;
+  for (i = 0; i < string.length; i++) {
+    chr = string.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+$(function(){
+
+  var removeIfEmpty = $('.jobs-page .remove-if-empty');
+  removeIfEmpty.each(function(index, item_row) {
+    if (!$(item_row).html()) {
+      $(item_row).remove();
+    } else if (!$(item_row).html().trim()) {
+      $(item_row).remove();
+    }
+  });
+
+  $('img.remove-if-no-src').filter(':not([src]), [src=""]').remove();
+
+  $('div.remove-if-no-src').each(function(index, item_row) {
+    let imgs = $(item_row).find('img').filter(':not([src]), [src=""]').remove();
+    if (imgs.length > 0) {
+      $(this).remove();
+    }
+  });
+
+  var removeIfNolink = $('.jobs-page a.remove-if-nolink');
+  removeIfNolink.each(function(index, item_row) {
+    if (!$(item_row).attr('href')) {
+      $(item_row).remove();
+    } else if (!$(item_row).attr('href').trim()) {
+      $(item_row).remove();
+    }
+  });
+
+  var adjustGlobalUrls = $('.jobs-page a');
+  adjustGlobalUrls.each(function(index, adjustGlobalUrl) {
+    var href = $(adjustGlobalUrl).attr('href');
+    var jibe_site = $(adjustGlobalUrl).attr('jibe-site');
+    if (href) {
+      if (href.includes('global_jibe_site') && jibe_site) {
+        href = href.replace("{{global_jibe_site}}", jibe_site);
+        href = href.replace("{global_jibe_site}", jibe_site);
+        href = href.replace("global_jibe_site", jibe_site);
+      }
+      $(adjustGlobalUrl).attr('href', href);
+    }
+  });
+
+  /**
+   * this function use to get background value from background selector
+   * @param {*} stringValue 
+   */
+  function adjustInputBackgroundObject(stringValue, parent) {
+    if (!stringValue) {
+      parent.find('input.input-adjust-background-object-cms-result').val('');
+      return;
+    }
+    var trimValue = stringValue.trim();
+    if(
+      trimValue &&
+      (trimValue[trimValue.length -1] === '}') &&
+      (trimValue.split(".").length <= 2) &&
+      (trimValue.indexOf('Doc') > 0) &&
+      !trimValue.includes('.colorinfo.color')) {
+        var result = trimValue.splice(trimValue.length -1, 0, ".colorinfo.color");
+        trimValue = result;
+    }
+    parent.find('input.input-adjust-background-object-cms-result').val(trimValue);
+
+  }
+  
+  var inputAdjustBackgroundObjectCms = $('input.input-adjust-background-object-cms');
+  inputAdjustBackgroundObjectCms.each(function(index, item_row) {
+    $(item_row).on('input', function(){
+      var trimValue = $(this).val();
+      adjustInputBackgroundObject(trimValue, $(this).parent());
+    });
+    var oldValue = $(item_row).parent().find('input.input-adjust-background-object-cms-result').val();
+    if (!$(item_row).val() && oldValue) {
+      $(item_row).val(oldValue);
+    } else {
+      adjustInputBackgroundObject($(item_row).val(), $(item_row).parent());
+    }
+  });
+
+  // handle input only allow number
+  $("input.only-allow-number").keydown(function (e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+         // Allow: Ctrl+A, Command+A
+        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+         // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+             // var it happen, don't do anything
+             return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+  });
+
+  $(".hide-when-load-page").each(function() {
+    $(this).removeClass('hide-when-load-page');
+  });
+});
+
+
+// All customer function
+$(function(){
+  function updateExternalInternalFooterLink() {
+    $("a[title='Search Jobs']" ).each(function() {
+      var redirectUrlUI = $(this);
+      if (!redirectUrlUI.attr('internal-external-search-url')) {
+        redirectUrlUI.attr('internal-external-search-url', redirectUrlUI.attr('href'));
+      }
+      var internalExternalUrl = redirectUrlUI.attr('internal-external-search-url');
+      if (internalExternalUrl) {
+        // check login user
+        if ($.isloggedin && $.isloggedin()) {
+          redirectUrlUI.attr('href', internalExternalUrl + '/internal');
+        } else {
+          redirectUrlUI.attr('href', internalExternalUrl + '/external');
+        }
+      }
+    });
+  }
+
+  updateExternalInternalFooterLink();
+})
+
+
+jQuery(function ($) {
+  $.isloggedin = function () {
+    return ($('.jobs-page.jobs-header').attr('isloggedin') === 'true');
+  }
+})
+
+$(function(){
+  var tabletBreakPoint = '991px';
+  var jobHeaderUI = $('nav.jobs-header');
+  if (jobHeaderUI.length <= 0) {
+    return;
+  }
+  // click body
+  $('body').on('click', function(event){
+    jobHeaderUI.find('.header-sub-sub-menu:not(.hovered)').removeClass('show');
+  });
+  $('body').mousemove(function(event){
+    resetHoverStateForKeyboardEvent();
+  });
+
+  jobHeaderUI.find('.nav-link.toggle-button button').on('click', function (event) {
+    if (window.matchMedia('(max-width: ' + tabletBreakPoint + ')').matches) {
+      var toggleButton = $(this).parent();
+      var isCollapsible = $(this).hasClass('menu-collapse');
+      if(isCollapsible){
+        toggleButton.closest('.desktop-nav-item').removeClass('show');
+        toggleButton.next('.header-sub-menu').removeClass('show');
+        $(this).removeClass('menu-collapse');
+        checkForExpandAccessibility();
+      }else{
+        jobHeaderUI.find('.desktop-nav-item .dropdown-menu.header-sub-menu').removeClass('show');
+        toggleButton.next('.header-sub-menu').addClass('show');
+        $('.desktop-nav-item').removeClass('show');
+        toggleButton.closest('.desktop-nav-item').addClass('show');
+        $('.expand-button').removeClass('menu-collapse');
+        $(this).addClass('menu-collapse');
+          checkForExpandAccessibility();
+        }
+    }
+  });
+
+  // Reset state when switching from tabler to desktop view
+  window.matchMedia('(min-width: 992px)').addListener(function (event) {
+    if (event.matches) {
+      $('.desktop-nav-item.show').removeClass('show');
+      $('.dropdown-menu.header-sub-menu.show').removeClass('show');
+      checkForExpandAccessibility();
+    }
+  })
+
+  // Reset state when switching from desktop to tablet view
+  window.matchMedia('(max-width: ' + tabletBreakPoint + ')').addListener(function (event) {
+    if (event.matches) {
+      jobHeaderUI.find('.submenu-tablet.dropdown').addClass('open show hide-in-tablet-breakpoint');
+      jobHeaderUI.find('.nav-item.desktop-nav-item').removeClass('open show hide-in-tablet-breakpoint');
+    }
+  })
+
+  // Hide sub-menu wheen mouse leaves in desktop state
+  jobHeaderUI.find('.header-sub-menu').mouseleave(function () {
+    if (window.matchMedia('(min-width: 992px)').matches) {
+      $(this).removeClass('show');
+    }
+  });
+
+  // click navbar-toggler
+  jobHeaderUI.find('.navbar-toggler').on('click', function(event){
+    $(".navbar-collapse").collapse('show');
+    showSubMenu(false, $('.jobs-header .desktop-submenu-toggle'), $('.jobs-header .submenu-tablet'), $('.jobs-header .header-sub-sub-menu'));
+    event.stopPropagation();
+    event.preventDefault();
+  });
+  jobHeaderUI.find('.navbar-toggler-close').on('click', function(event){
+    $(".navbar-collapse").removeClass('show');
+    $('.desktop-nav-item').removeClass('show');
+    showSubMenu(false, jobHeaderUI.find('.desktop-submenu-toggle'), $('.jobs-header .submenu-tablet'), $('.jobs-header .header-sub-sub-menu'));
+    event.stopPropagation();
+    event.preventDefault();
+    checkForExpandAccessibility();
+  });
+
+  // chose header item
+  jobHeaderUI.find('.dropdown-menu.header-sub-menu a.menu-link').on('click', function(event){
+    $(".navbar-collapse").removeClass('show');
+  });
+
+  function showSubMenu(isShow, toggleButton, tabletMenu, subMenu, mainMenu) {
+    if (!isShow) {
+      jobHeaderUI.find('.navbar-nav li.nav-item').removeClass('hide-in-tablet-breakpoint');
+      if (tabletMenu) {
+        tabletMenu.addClass('hide-in-tablet-breakpoint');
+      }
+      if (subMenu) {
+        subMenu.removeClass('show');
+      }
+      if (mainMenu) {
+        mainMenu.addClass('show');
+      }
+    } else {
+      jobHeaderUI.find('.navbar-nav li.nav-item').addClass('hide-in-tablet-breakpoint');
+      if (tabletMenu) {
+        tabletMenu.removeClass('hide-in-tablet-breakpoint');
+      }
+      if (subMenu) {
+        subMenu.addClass('show');
+      }
+      if (mainMenu) {
+        mainMenu.removeClass('show');
+      }
+    }
+    checkForExpandAccessibility();
+  }
+
+  // click desktop-submenu-toggle
+  function clickToDesktopSubmenuToggle(toggleButton) {
+    var tabletUISelector = toggleButton.attr('tablet-ui');
+    var submneuUISelector = toggleButton.attr('submenu-ui');
+    var isCommunityOff = toggleButton.hasClass('desktop-submenu-toggle-off');
+    var dropdownMenu = toggleButton.closest('.dropdown-menu');
+    showSubMenu(isCommunityOff, toggleButton, $(tabletUISelector), $(submneuUISelector), dropdownMenu);
+  }
+  jobHeaderUI.find('.desktop-submenu-toggle').on('click', function(event){
+    clickToDesktopSubmenuToggle($(this));
+    event.stopPropagation();
+    // event.preventDefault();
+  });
+
+  // click community close in tablet
+  jobHeaderUI.find('.submenu-tablet .nav-link button').on('click', function(event){
+    var tabletUI = $(this).closest('.submenu-tablet').parent().find('.submenu-tablet');
+    var desktopUISelector = tabletUI.attr('desktop-ui');
+    showSubMenu(false, $(desktopUISelector), tabletUI);
+    jobHeaderUI.find('li.nav-item.has-sub-menu:not(.submenu-tablet) .dropdown-menu,.navbar-collapse .navbar-nav li.nav-item.has-sub-menu:not(.submenu-tablet)').removeClass('show');
+    // show parent sub menu after back
+    var tabletParentSubMenu = $(this).closest('.submenu-tablet').attr('tablet-parent-sub-menu');
+    $(tabletParentSubMenu).addClass('show');
+    $(tabletParentSubMenu).closest('.nav-item').addClass('show');
+    event.stopPropagation();
+    event.preventDefault();
+    checkForExpandAccessibility();
+  })
+
+  // click to close submenu
+  jobHeaderUI.find('.header-sub-sub-menu a.back-to-main-menu, .header-sub-sub-menu span.back-to-main-menu, .header-sub-sub-menu button.back-to-main-menu').on('click', function(event){
+    var submenuUI = $(this).closest('.header-sub-sub-menu');
+    var mainMenu = submenuUI.parent().find('.header-sub-menu:not(.header-sub-sub-menu)')
+    showSubMenu(false, null, null, submenuUI, mainMenu);
+    event.stopPropagation();
+    // event.preventDefault();
+  })
+
+  // remove href if the link doesn't go any where
+  jobHeaderUI.find('.ignore-dropdown-event').each(function(index, element) {
+    var href = $(element).attr('href');
+    if (!href || href === '#' || href.includes('javascript')) {
+      $(element).addClass('un-clickable');
+    }
+  })
+
+  // ignore expand menu event
+  jobHeaderUI.find('.ignore-dropdown-event').on('click', function(event){
+    event.stopPropagation();
+    // event.preventDefault();
+  })
+  
+  // Set color
+  jobHeaderUI.find('.desktop-nav-item').each(function (_, element) {
+    var borderColor = $(element).css('border-bottom-color');
+    $(element).find('[tablet-ui]').each(function (_, item) {
+      var tabletUiSelector = $(item).attr('tablet-ui');
+      var tabletUiElement = $(tabletUiSelector);
+      if (tabletUiElement.length <= 0) {
+        return;
+      }
+      var parentLinkElement = tabletUiElement.find('.parent-link');
+      if (parentLinkElement.length <= 0) {
+        return;
+      }
+      parentLinkElement.css('color', borderColor);
+    });
+  });
+
+  // handle keyboard event for header menu
+  function resetHoverStateForKeyboardEvent() {
+    $(".nav-item").removeClass('hovered');
+    $(".nav-item .header-sub-sub-menu").removeClass('hovered');
+  }
+  
+  function toggleHideShowNavItemKeyboard(navItem) {
+    jobHeaderUI.find('.header-sub-sub-menu:not(.hovered)').removeClass('show');
+    var isHover = navItem.hasClass('hovered');
+    resetHoverStateForKeyboardEvent();
+    if (isHover) {
+      navItem.removeClass('hovered');
+    } else {
+      navItem.addClass('hovered');
+    }
+    checkForExpandAccessibility();
+
+  }
+
+  // $(".nav-item > .nav-link > a:not(.handling-keyboard), .nav-item > button.nav-link:not(.handling-keyboard)").keydown(function(event) {
+  //   var navItem = $(this).closest('.nav-item');
+  //   var headerSubSubMenu = navItem.find('div.header-sub-sub-menu');
+  //   if (headerSubSubMenu.is(":visible")) {
+  //     return;
+  //   }
+  //   // space button
+  //   if (event.which === 32) { // space key
+  //     toggleHideShowNavItemKeyboard(navItem);
+  //   } else if (event.which === 40) { // down key
+  //     var submenuList = navItem.find('.dropdown-menu > a.dropdown-item');
+  //     if (submenuList.length > 0) {
+  //       submenuList.get(0).focus();
+  //     }
+  //   }
+  // });
+  // $(".nav-item > .nav-link > a, .nav-item > button.nav-link").addClass('handling-keyboard');
+
+  $('.navigation__item__title').keydown(function(event){
+    var navItem= $(this);
+    if(event.which==9){
+     toggleHideShowNavItemKeyboard(navItem)
+    };
+  });
+  $('.navigation__item__title').on('focus',function(){
+    $(".nav-item.desktop-nav-item").removeClass('hovered');
+  });
+  $('.nav-item .search-jobs-button').on('focus',function(){
+    $(".nav-item.desktop-nav-item").removeClass('hovered');
+  });
+  $('.nav-link .handling-keyboard').on('focus',function(){
+    $(".nav-item.desktop-nav-item").removeClass('hovered');
+  });
+
+
+  
+  $('.navigation__item__title').keydown(function(event){
+    var navItem= $(this);
+    if(event.which==9){
+     toggleHideShowNavItemKeyboard(navItem)
+    };
+  });
+  $('.navigation__item__title').on('focus',function(){
+    $(".nav-item.desktop-nav-item").removeClass('hovered');
+  });
+  $('.nav-item .search-jobs-button').on('focus',function(){
+    $(".nav-item.desktop-nav-item").removeClass('hovered');
+  });
+
+
+
+
+  $(".nav-item > .nav-link > button.carat-button:not(.handling-keyboard)").keydown(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    var navItem = $(this).closest('.nav-item');
+    if (keycode === 32 || keycode === 13) { // space key, enter key
+      toggleHideShowNavItemKeyboard(navItem);
+    } else if (keycode === 40) { // down key
+      var submenuList = navItem.find('.dropdown-menu > a.dropdown-item');
+      if (submenuList.length > 0) {
+        submenuList.get(0).focus();
+      }
+    }
+  });
+  $(".nav-item > .nav-link > button.carat-button").addClass('handling-keyboard');
+
+  // handle keyboard event for header sub menu
+  $(".nav-item > .dropdown-menu > a.dropdown-item:not(.handling-keyboard)").keydown(function(event) {
+    var navItem = $(this).closest('.nav-item');
+    var headerSubSubMenu = navItem.find('div.header-sub-sub-menu');
+    if (headerSubSubMenu.is(":visible")) {
+      return;
+    }
+    if (event.which === 40) { // down key
+      var nextElement = $(this).next();
+      if (nextElement.length > 0) {
+        nextElement.focus();
+      // } else {
+      //   navItem.removeClass('hovered');
+      //   navItem.find('.nav-link > button.carat-button.handling-keyboard').focus();
+      }
+    } else if (event.which === 38) { // up key
+      var previousElement = $(this).prev();
+      if (previousElement.length > 0) {
+        previousElement.focus();
+      // } else {
+      //   navItem.removeClass('hovered');
+      //   navItem.find('.nav-link > a.handling-keyboard').focus();
+      }
+    } else if (event.which === 32 && $(this).hasClass('desktop-submenu-toggle')) { // space key
+      var submneuUISelector = $(this).attr('submenu-ui');
+      clickToDesktopSubmenuToggle($(this));
+      $(submneuUISelector).find('span > a, button > a').focus();
+      $(submneuUISelector).addClass('hovered');
+      $(submneuUISelector).attr('desktop-submenu-toggle', $(this).attr('class').split(' ').join('.'));
+    }
+  });
+  $(".nav-item > .dropdown-menu:not(.header-sub-sub-menu) > a.dropdown-item").addClass('handling-keyboard');
+  // handle keyboard event for menu of header sub menu
+  $(".nav-item > .dropdown-menu.header-sub-sub-menu > span.dropdown-item > a:not(.handling-keyboard), .nav-item > .dropdown-menu.header-sub-sub-menu > button.dropdown-item > a:not(.handling-keyboard)").keydown(function(event) {
+    var navItem = $(this).closest('.nav-item');
+    var headerSubSubMenu = $(this).closest('.header-sub-sub-menu');
+    var desktopSubmenuToggleSelector = headerSubSubMenu.attr('desktop-submenu-toggle');
+    var desktopSubmenuToggle;
+    if (desktopSubmenuToggleSelector) {
+      desktopSubmenuToggle = navItem.find('.'+desktopSubmenuToggleSelector);
+    }
+    if (event.which === 40) { // down key
+      var nextElement = $(this).parent().next();
+      if (nextElement.length > 0) {
+        nextElement.focus();
+      }
+    } else if (event.which === 38) { // up key
+      headerSubSubMenu.removeClass('hovered');
+      headerSubSubMenu.removeClass('show');
+      desktopSubmenuToggle.focus();
+    }
+  });
+  $(".nav-item > .dropdown-menu.header-sub-sub-menu > span.dropdown-item > a.dropdown-item, .nav-item > .dropdown-menu.header-sub-sub-menu > button.dropdown-item > a.dropdown-item").addClass('handling-keyboard');
+  $(".nav-item > .dropdown-menu.header-sub-sub-menu > a.dropdown-item:not(.handling-keyboard)").keydown(function(event) {
+    var navItem = $(this).closest('.nav-item');
+    var headerSubSubMenu = $(this).closest('.header-sub-sub-menu');
+    var desktopSubmenuToggleSelector = headerSubSubMenu.attr('desktop-submenu-toggle');
+    var desktopSubmenuToggle;
+    if (desktopSubmenuToggleSelector) {
+      desktopSubmenuToggle = navItem.find('.'+desktopSubmenuToggleSelector);
+    }
+    if (event.which === 40) { // down key
+      var nextElement = $(this).next();
+      if (nextElement.length > 0) {
+        nextElement.focus();
+      } else {
+        headerSubSubMenu.removeClass('hovered');
+        headerSubSubMenu.removeClass('show');
+        desktopSubmenuToggle.focus();
+      }
+    } else if (event.which === 38) { // up key
+      var previousElement = $(this).prev();
+      if (previousElement.length > 0) {
+        if  (previousElement.is('a')) {
+          previousElement.focus();
+        } else {
+          previousElement.find('a').focus();
+        }
+      } else {
+        headerSubSubMenu.removeClass('hovered');
+        headerSubSubMenu.removeClass('show');
+        desktopSubmenuToggle.focus();
+      }
+    }
+  });
+  $(".nav-item > .dropdown-menu.header-sub-sub-menu > a.dropdown-item").addClass('handling-keyboard');
+
+  // Click Skip to Content
+  $('.skip-main').click(function () {
+    var wrapper = document.getElementById('wrapperContent');
+    if (wrapper.length >= 0) {
+      return
+    }
+    $(wrapper)
+    .attr('tabindex', -1)
+    .on('blur focusout', function () {
+      $(this).removeAttr('tabindex');
+    })
+    .focus();
+  });
+  
+ /* $('.websec-login,.websec-logout').each(function() {
+    var websecPage = $(this).attr('href');
+    if (websecPage) {
+      var pageUrl = location.pathname+location.search;
+      pageUrl = removeParameterFromURL(pageUrl, 'redirect_url');
+      websecPage = removeParameterFromURL($.trim(websecPage), 'redirect_url');
+      websecPage = insertParametertoUrl(websecPage, {redirect_url: pageUrl});
+      $(this).attr('href', websecPage);
+    }
+  });*/
+
+  function updateExternalInternalLink() {
+    $( "a:contains('Search Jobs')").each(function() {
+      var redirectUrlUI = $(this);
+      if (!redirectUrlUI.attr('internal-external-search-url')) {
+        redirectUrlUI.attr('internal-external-search-url', redirectUrlUI.attr('href'));
+      }
+      var internalExternalUrl = redirectUrlUI.attr('internal-external-search-url');
+      if (internalExternalUrl) {
+        // check login user
+        if ($.isloggedin && $.isloggedin()) {
+          redirectUrlUI.attr('href', internalExternalUrl + '/internal');
+        } else {
+          redirectUrlUI.attr('href', internalExternalUrl + '/external');
+        }
+      }
+    });
+    $( "a:contains('Check Status')").each(function() {
+      var redirectUrlUI = $(this);
+      if ($.isloggedin && $.isloggedin()) {
+        redirectUrlUI.attr('href', 'https://entidpext.cable.comcast.com/idp/startSSO.ping?PartnerSpId=https://www.successfactors.com&TargetResource=/sf/careers/jobapplications');
+      } else {
+        redirectUrlUI.attr('href', 'https://comcast.wd5.myworkdayjobs.com/Comcast_Careers/');
+      }
+    });
+  }
+
+  updateExternalInternalLink();
+  // check login user
+  $('nav.jobs-header').on("userLoginChecked", function(event, showName){
+    updateExternalInternalLink();
+  });
+
+  /*if (jobHeaderUI.attr('isCheckedLogin') === 'false') {
+    jobHeaderUI.attr('isCheckedLogin', 'true');
+    $.ajax({
+      cache: false,
+      url: "/checkauth",
+      dataType: "json",
+      success: function(json) {
+        jobHeaderUI.attr('isLoggedIn', 'true');
+        $('body').addClass('isLoggedIn');
+        jobHeaderUI.find('.login-flow-user-logged-in').removeClass('hide');
+        jobHeaderUI.trigger("userLoginChecked", 'true');
+        var fullName = _.get(json, 'user.user.display_name', '');
+        jobHeaderUI.find('.login-flow-user-logged-in .full-name').html("Hello, " + fullName);
+      },
+      error: function() {
+        jobHeaderUI.attr('isLoggedIn', 'false');
+        $('body').removeClass('isLoggedIn');
+        jobHeaderUI.find('.login-flow-user-not-logged-in').removeClass('hide');
+        jobHeaderUI.trigger("userLoginChecked", 'true');
+      },
+    });
+  }*/
+
+  // accessibility
+  function checkForExpandAccessibility() {
+    $('li.nav-item.desktop-nav-item.has-sub-menu.dropdown').each(function() {
+      var menu = $(this);
+      var isShow = menu.hasClass('show') || menu.hasClass('hovered');
+      if (isShow) {
+        menu.find('button.expand-button, button.carat-button').attr('aria-expanded', 'true');
+      } else {
+        menu.find('button.expand-button, button.carat-button').attr('aria-expanded', 'false');
+      }
+    });
+  }
+
+
+
+    // All customer function
+  var createImage = function (src, cb) {
+    if (!isImage(src)) {
+      return;
+    }
+    var img = new Image();
+    img.onload = function() {
+      if (cb) {
+        cb(img);
+      }
+    };
+    img.crossOrigin = "Anonymous";
+    img.src = src;
+  };
+
+
+  var logo = jobHeaderUI.find('.logo img');
+  if (!logo.hasClass('checked')) {
+    createImage(logo.attr('src'), function(image){
+      resize(image);
+    });
+  }
+  logo.addClass('checked');
+
+  /*
+  * Draw the image object on a new canvas and half the size of the canvas
+  * until the darget size has been reached
+  * Afterwards put the base64 data into the target image
+  */
+  var resize = function (image) {
+    var realWidth = image.naturalWidth;
+    var realHeight = image.naturalHeight;
+    var expectedHeight = 200;
+    if (detectIE()) {
+      expectedHeight = 100;
+    }
+    var ratio = expectedHeight * 1.0 / realHeight;
+    var expectedWidth = ratio * realWidth;
+    if (ratio > 1 || !realWidth || !realHeight) {
+      return;
+    }
+    downscale(image, expectedWidth, expectedHeight, {imageType: 'png'},function(dataURL) {
+      logo.attr('src', dataURL);
+    });
+  };
+
+    $("a.navigation__item__title").each(function() {
+      if (this.href.indexOf('https://comcast.jibeapply.com/main/talentcommunity/signup') != -1) {
+    $(this).removeClass('color-black');
+     $(this).attr("style", "color: #008CC3  !important; font-weight: 700");
+    $(this).parent('span').removeClass('color-black');
+            $(this).parent('span').attr("style", "color: #008CC3  !important; font-weight: 700");
+        }
+    });
+
+
+})
+
+
+
+/* downscale 1.0.5
+   Better image downscale with canvas.
+   https://github.com/ytiurin/downscale
+   Eugene Tiurin <yevhentiurin@gmail.com>
+   Under MIT license
+*/
+jQuery(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        module.exports = factory();
+    } else {
+        root.downscale = factory();
+    }
+}(this, function () {
+
+function resizeWithCanvas(canvas, source, destWidth, destHeight, sourceX,
+  sourceY, sourceWidth, sourceHeight)
+{
+  var canvas = document.createElement("canvas")
+
+  canvas.width  = destWidth
+  canvas.height = destHeight
+
+  var ctx = canvas.getContext("2d")
+
+  ctx.mozImageSmoothingEnabled    = true
+  ctx.imageSmoothingQuality       = "high"
+  ctx.webkitImageSmoothingEnabled = true
+  ctx.msImageSmoothingEnabled     = true
+  ctx.imageSmoothingEnabled       = true
+
+  ctx.drawImage(source,
+    sourceX, sourceY, sourceWidth, sourceHeight,
+    0, 0, destWidth, destHeight)
+
+  return canvas
+}
+function round(val)
+{
+  return (val + 0.49) << 0
+}
+
+
+function ImageDataPolyfill (width, height) {
+
+  const canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d'),
+        imageData = ctx.createImageData(width, height);
+  return imageData;
+};
+
+function downsample(sourceImageData, destWidth, destHeight, sourceX, sourceY,
+  sourceWidth, sourceHeight)
+{
+  var dest = new ImageDataPolyfill(destWidth, destHeight)
+
+  var SOURCE_DATA  = new Int32Array(sourceImageData.data.buffer)
+  var SOURCE_WIDTH = sourceImageData.width
+
+  var DEST_DATA  = new Int32Array(dest.data.buffer)
+  var DEST_WIDTH = dest.width
+
+  var SCALE_FACTOR_X  = destWidth  / sourceWidth
+  var SCALE_FACTOR_Y  = destHeight / sourceHeight
+  var SCALE_RANGE_X   = round(1 / SCALE_FACTOR_X)
+  var SCALE_RANGE_Y   = round(1 / SCALE_FACTOR_Y)
+  var SCALE_RANGE_SQR = SCALE_RANGE_X * SCALE_RANGE_Y
+
+  for (var destRow = 0; destRow < dest.height; destRow++) {
+    for (var destCol = 0; destCol < DEST_WIDTH; destCol++) {
+
+      var sourceInd = sourceX + round(destCol / SCALE_FACTOR_X) +
+        (sourceY + round(destRow / SCALE_FACTOR_Y)) * SOURCE_WIDTH
+
+      var destRed   = 0
+      var destGreen = 0
+      var destBlue  = 0
+      var destAlpha = 0
+
+      for (var sourceRow = 0; sourceRow < SCALE_RANGE_Y; sourceRow++)
+        for (var sourceCol = 0; sourceCol < SCALE_RANGE_X; sourceCol++) {
+          var sourcePx = SOURCE_DATA[sourceInd + sourceCol + sourceRow * SOURCE_WIDTH]
+          destRed   += sourcePx <<  24 >>> 24
+          destGreen += sourcePx <<  16 >>> 24
+          destBlue  += sourcePx <<  8  >>> 24
+          destAlpha += sourcePx >>> 24
+        }
+
+      destRed   = round(destRed   / SCALE_RANGE_SQR)
+      destGreen = round(destGreen / SCALE_RANGE_SQR)
+      destBlue  = round(destBlue  / SCALE_RANGE_SQR)
+      destAlpha = round(destAlpha / SCALE_RANGE_SQR)
+
+      DEST_DATA[destCol + destRow * DEST_WIDTH] =
+        (destAlpha << 24) |
+        (destBlue  << 16) |
+        (destGreen << 8)  |
+        (destRed)
+    }
+  }
+
+  return dest
+}
+function createTiming(enabled, source, destWidth, destHeight)
+{
+  var start  = new Date
+  var timing = {}
+  var prev   = start
+  var n      = "01"
+
+  return {
+    mark: enabled ? function(name) {
+      name = n + ". " + (name || "...")
+      timing[name] = { "time (ms)": (new Date) - prev }
+      prev = new Date
+      n = ("0" + ((n >> 0) + 1)).substr(-2)
+    } : new Function,
+    finish: enabled ? function() {
+      timing[n + " TOTAL"] = { "time (ms)": (new Date) - start }
+      console.log("IMAGE SOURCE:", source)
+      console.log("DOWNSCALE TO:", destWidth + "x" + destHeight)
+      console.table(timing)
+    } : new Function
+  }
+}
+
+function createCache()
+{
+  var keys       = []
+  var values     = []
+  var subscribes = []
+  var PENDING    = new Object
+
+  return {
+    createSetter: function(key) {
+      if (this.get(key)) {
+        return
+      }
+      var cacheInd = keys.push(key) - 1
+      values.push(PENDING)
+      subscribes.push([])
+
+      return function(value) {
+        values[cacheInd] = value
+        subscribes[cacheInd] = subscribes[cacheInd].reduce(function(r, resolve) {
+          resolve(value)
+        }, [])
+      }
+    },
+    get: function(key, resolve) {
+      var cacheInd = keys.indexOf(key)
+      if (!~cacheInd) {
+        return
+      }
+      if (values[cacheInd] === PENDING) {
+        subscribes[cacheInd].push(resolve)
+        return
+      }
+      resolve(values[cacheInd])
+    },
+    has: function(key) {
+      return !!~keys.indexOf(key)
+    }
+  }
+}
+
+function getImageData(canvas, img, sourceWidth, sourceHeight)
+{
+  canvas.width  = sourceWidth
+  canvas.height = sourceHeight
+
+  var ctx = canvas.getContext("2d")
+  ctx.drawImage(img, 0, 0)
+
+  return ctx.getImageData(0, 0, sourceWidth, sourceHeight)
+}
+
+function putImageData(canvas, imageData)
+{
+  canvas.width  = imageData.width
+  canvas.height = imageData.height
+
+  var ctx = canvas.getContext("2d")
+  ctx.putImageData(imageData, 0, 0)
+
+  return canvas
+}
+
+function remapDimensions(destWidth, destHeight, sourceX, sourceY, sourceWidth,
+  sourceHeight)
+{
+  var origSourceWidth  = sourceWidth
+  var origSourceHeight = sourceHeight
+
+  var sourceRatio = sourceWidth / sourceHeight
+
+  if (destWidth === 0) {
+    destWidth = destHeight * sourceRatio >> 0
+  }
+
+  if (destHeight === 0) {
+    destHeight = destWidth / sourceRatio >> 0
+  }
+
+  var destRatio   = destWidth / destHeight
+
+  if (destRatio > sourceRatio) {
+    sourceHeight = sourceWidth / destRatio >> 0
+  }
+  else {
+    sourceWidth = sourceHeight * destRatio >> 0
+  }
+
+  var sourceX = sourceX || (origSourceWidth  - sourceWidth)  / 2 >> 0
+  var sourceY = sourceY || (origSourceHeight - sourceHeight) / 2 >> 0
+
+  return {
+    destWidth    : destWidth,
+    destHeight   : destHeight,
+    sourceX      : sourceX,
+    sourceY      : sourceY,
+    sourceWidth  : sourceWidth,
+    sourceHeight : sourceHeight
+  }
+}
+
+function produceResult(canvas, options, callback)
+{
+  if (options.returnCanvas) {
+    callback(canvas)
+    return
+  }
+
+  if (options.returnBlob) {
+    canvas.toBlob(callback, "image/" + (options.imageType || "jpeg"),
+      options.quality || .85)
+    return
+  }
+
+  var dataURL = canvas.toDataURL("image/" + (options.imageType || "jpeg"),
+    options.quality || .85)
+
+  callback(dataURL)
+}
+
+function loadArrayBuffer(source, callback)
+{
+  var xhr = new XMLHttpRequest
+
+  xhr.open("GET", source)
+  xhr.responseType = "arraybuffer"
+
+  xhr.addEventListener("load", function() {
+    callback(this.response)
+  })
+
+  xhr.send()
+}
+
+function loadImg(img, callback)
+{
+  if (img.complete) {
+    callback()
+  }
+  else {
+    img.addEventListener("load",  callback)
+  }
+}
+
+function loadVideo(video, callback)
+{
+  if (video.readyState > 1) {
+    callback()
+  }
+  else {
+    video.addEventListener("loadeddata", callback)
+  }
+}
+
+function detectSourceType(source)
+{
+  if (source instanceof File) {
+    return "File"
+  }
+  if (source instanceof HTMLImageElement) {
+    return "HTMLImageElement"
+  }
+  if (source instanceof HTMLVideoElement) {
+    return "HTMLVideoElement"
+  }
+  if (typeof source === "string") {
+    return "URL"
+  }
+}
+
+function validateArguments(args)
+{
+  if (args.length < 3) {
+    return new TypeError("3 arguments required, but only " + args.length + " present.")
+  }
+  if (!detectSourceType(args[0])) {
+    return new TypeError("First argument should be HTMLImageElement, HTMLVideoElement, File of String")
+  }
+  if (typeof args[1] !== "number") {
+    return new TypeError("Second argument should be a number")
+  }
+  if (typeof args[2] !== "number") {
+    return new TypeError("Third argument should be a number")
+  }
+}
+
+function downscale(source, destWidth, destHeight, options, cb)
+{
+  var timing = createTiming(options && options.debug || false,
+    source, destWidth, destHeight)
+
+  var err = validateArguments(arguments)
+  if (err instanceof TypeError) {
+    return Promise.reject(err)
+  }
+
+  options = options || {}
+
+  var resolveResult, rejectResult
+  resolveResult = function(result) {
+    if(cb) {
+      cb(result);
+    }
+  };
+  // var result = new Promise(function(resolve, reject) {
+  //   resolveResult = resolve
+  //   rejectResult  = reject
+  // })
+
+  downscale.canvas = downscale.canvas || document.createElement("canvas")
+  downscale.cache  = downscale.cache  || createCache()
+
+  var canvas = downscale.canvas
+  var cache  = downscale.cache
+
+  if (cache.has(source)) {
+    timing.mark()
+    cache.get(source,
+    function(cacheData) {
+      timing.mark("PENDING CACHE")
+      var img = cacheData[0]
+      var imageData = cacheData[1]
+
+      var dims = remapDimensions(destWidth, destHeight, options.sourceX,
+        options.sourceY, imageData.width, imageData.height)
+
+      if (dims.sourceWidth  / dims.destWidth  >= 2 &&
+          dims.sourceHeight / dims.destHeight >= 2) {
+        timing.mark()
+        var destImageData = downsample(imageData, dims.destWidth,
+          dims.destHeight, dims.sourceX, dims.sourceY, dims.sourceWidth,
+          dims.sourceHeight)
+        timing.mark("DOWNSCALE")
+
+        canvas = putImageData(canvas, destImageData)
+      }
+      else {
+        canvas = resizeWithCanvas(canvas, img, dims.destWidth,
+          dims.destHeight, dims.sourceX, dims.sourceY, dims.sourceWidth,
+          dims.sourceHeight)
+        timing.mark("RESIZE WITH CANVAS")
+      }
+
+      produceResult(canvas, options,
+      function(result) {
+        timing.mark("PRODUCE RESULT")
+        resolveResult(result)
+        timing.finish()
+      })
+    })
+
+    return result
+  }
+
+  var scaleSourceResolve = function(source, width, height) {
+    var dims = remapDimensions(destWidth, destHeight, options.sourceX,
+      options.sourceY, width, height)
+
+    if (dims.sourceWidth  / dims.destWidth  >= 2 &&
+        dims.sourceHeight / dims.destHeight >= 2) {
+      timing.mark()
+      var imageData = getImageData(canvas, source, width, height)
+      timing.mark("GET IMAGE DATA")
+
+      var destImageData = downsample(imageData, dims.destWidth,
+        dims.destHeight, dims.sourceX, dims.sourceY, dims.sourceWidth,
+        dims.sourceHeight)
+      timing.mark("DOWNSCALE")
+
+      canvas = putImageData(canvas, destImageData)
+
+      if (detectSourceType(source) !== "HTMLVideoElement") {
+          cache.createSetter(source)([source, imageData]);
+      }
+    }
+    else {
+      canvas = resizeWithCanvas(canvas, source, dims.destWidth,
+        dims.destHeight, dims.sourceX, dims.sourceY, dims.sourceWidth,
+        dims.sourceHeight)
+      timing.mark("RESIZE WITH CANVAS")
+    }
+
+    produceResult(canvas, options,
+    function(result) {
+      timing.mark("PRODUCE RESULT")
+      resolveResult(result)
+      timing.finish()
+    })
+  }
+
+  var URL = window.URL || window.webkitURL
+
+  switch (detectSourceType(source)) {
+
+    case "File":
+      var sourceImg = document.createElement("img")
+      timing.mark()
+      sourceImg.src = URL.createObjectURL(source)
+      timing.mark("READ FILE")
+      loadImg(sourceImg,
+      function() {
+        timing.mark("LOAD IMAGE")
+        scaleSourceResolve(sourceImg, sourceImg.naturalWidth,
+          sourceImg.naturalHeight)
+      })
+      break
+
+    case "HTMLImageElement":
+      timing.mark()
+      loadImg(source,
+      function() {
+        timing.mark("LOAD IMAGE")
+        scaleSourceResolve(source, source.naturalWidth, source.naturalHeight)
+      })
+      break
+
+    case "HTMLVideoElement":
+      loadVideo(source,
+      function() {
+        scaleSourceResolve(source, source.videoWidth, source.videoHeight)
+      })
+      break
+
+    case "URL":
+      timing.mark()
+      setTimeout(function() {
+      loadArrayBuffer(source,
+      function(arrayBuffer) {
+        timing.mark("LOAD ARRAY BUFFER")
+        var arrayBufferView = new Uint8Array(arrayBuffer)
+        var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } )
+        var sourceImg = document.createElement("img")
+        sourceImg.src = URL.createObjectURL(blob)
+        timing.mark()
+        loadImg(sourceImg,
+        function() {
+          timing.mark("LOAD IMAGE")
+          scaleSourceResolve(sourceImg, sourceImg.naturalWidth,
+            sourceImg.naturalHeight)
+        })
+      })
+      })
+      break
+  }
+
+  // return result
+}
+    return downscale
+}));
+

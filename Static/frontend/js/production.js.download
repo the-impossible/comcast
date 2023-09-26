@@ -1,0 +1,18 @@
+// This file contains any global config information for production
+/* global config:true */
+config = {
+	api: {
+		baseUrl: 'https://app1.textrecruit.com/api',
+		v1: '/v1/textrecruit',
+		v2: '/v2/textrecruit',
+		v3: '/v3/textrecruit',
+		timeout: 10000,
+		clientVer: '2.0.0',
+		product: 'TextRecruit',
+		appName: 'jobChat',
+	},
+	realTime: {
+		chat: 'wss://rt.textrecruit.com/chat',
+	},
+	localesCdn: '2.7.0',
+};

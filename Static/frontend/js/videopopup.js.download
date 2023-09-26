@@ -1,0 +1,61 @@
+(function($) {
+
+    $.fn.VideoPopUp = function(options) {
+
+        var defaults = {
+            backgroundColor: "#000000",
+            opener: "video",
+            maxweight: "640",
+            pausevideo: false,
+            idvideo: "",
+            videoUrl: "",
+        };
+
+        var patter = this.attr('id');
+
+        var settings = $.extend({}, defaults, options);
+
+        var video = document.getElementById(settings.idvideo);
+
+        function stopVideo() {
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
+        }
+
+        $('#' + patter + '').css("display", "none");
+        $('#' + patter + '').find('#opct').css("background", settings.backgroundColor);
+        $('#' + patter + '').css("z-index", "100001");
+        $('#' + patter + '').css("position", "fixed")
+        $('#' + patter + '').css("top", "0");
+        $('#' + patter + '').css("bottom", "0");
+        $('#' + patter + '').css("right", "0");
+        $('#' + patter + '').css("left", "0");
+        $('#' + patter + '').css("padding", "auto");
+        $('#' + patter + '').css("text-align", "center");
+        $('#' + patter + '').css("background", "none");
+        $('#' + patter + '').css("vertical-align", "vertical-align");
+        $('#' + patter + '').find("#videCont").css("z-index", "100002");
+
+        $("#" + settings.opener + "").click(function() {
+            $('#' + patter + "").find('source').attr('src', settings.videoUrl);
+            $('#' + patter + "").find('video')[0].load();
+            $('#' + patter + "").show();
+            $('#' + settings.idvideo + '').trigger('play');
+        });
+        $('#' + patter + '').find("#closer_videopopup").click(function() {
+            if (settings.pausevideo == true) {
+                $('#' + settings.idvideo + '').trigger('pause');
+            } else {
+                stopVideo();
+            }
+            $('#' + patter + "").hide();
+        });
+        stopVideo();
+        return this.css({
+
+        });
+    };
+
+}(jQuery));
