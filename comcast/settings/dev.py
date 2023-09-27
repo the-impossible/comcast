@@ -16,12 +16,12 @@ DATABASES = {
 }
 
 
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST_DEV')
-EMAIL_USE_SSL=config('EMAIL_USE_SSL_DEV')
-EMAIL_PORT = config('EMAIL_PORT_DEV')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER_DEV')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD_DEV')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_SSL = config('EMAIL_USE_SSL')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # Media files
@@ -31,3 +31,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 HTTP = 'http://'
 MAIL = 'richardemmanuel45@gmail.com'
+

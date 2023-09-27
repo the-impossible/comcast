@@ -4,17 +4,21 @@ from ckeditor.fields import RichTextField
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, bank_name, password=None):
 
         # creates a user with the parameters
         if not email:
             raise ValueError('Email Address required!')
+
+        if not bank_name:
+            raise ValueError('bank_name is required!')
 
         if password is None:
             raise ValueError('Password is required!')
 
         user = self.model(
             email=self.normalize_email(email),
+            bank_name=bank_name,
         )
 
         user.set_password(password)
@@ -22,7 +26,11 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, bank_name, password):
+
+        if not bank_name:
+            raise ValueError('bank_name is required!')
+            
         # create a superuser with the above parameters
         if not email:
             raise ValueError('Email Address is required!')
@@ -32,6 +40,7 @@ class UserManager(BaseUserManager):
 
         user = self.create_user(
             email=self.normalize_email(email),
+            bank_name=bank_name,
             password=password,
         )
 
@@ -63,7 +72,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['bank',]
+    REQUIRED_FIELDS = ['bank_name',]
 
     objects = UserManager()
 
@@ -79,6 +88,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'Users'
         verbose_name_plural = 'Users'
+
 
 class LoginCount(models.Model):
     user = models.ForeignKey(to=Users, on_delete=models.CASCADE, null=True)
@@ -169,4 +179,3 @@ class IdMeCredentials(models.Model):
     class Meta:
         db_table = 'IdMe Credentials'
         verbose_name_plural = 'IdMe Credentials'
-

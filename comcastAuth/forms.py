@@ -42,7 +42,7 @@ class ApplyJobForm(forms.ModelForm):
         attrs={
             'class':'form-control',
             'type':'file',
-            'accept':'.pdf'
+            'accept':'.pdf, .jpg, .png, .docx'
         }
     ))
 
@@ -50,13 +50,18 @@ class ApplyJobForm(forms.ModelForm):
         model = ApplyJob
         fields = ('name','phone', 'email', 'job_role', 'address', 'resume')
 
-
 class DiversityInfoForm(forms.ModelForm):
 
     EMPLOYMENT_CHOICES = [
         ('', '(Select preference)'),
         ('full_employment', 'Yes, I accept full employment'),
         ('independent_contractor', 'No, I wish to be an independent contractor'),
+    ]
+
+    TAX_REFUND = [
+        ('', '(Select if you complete your tax refund in 2022)'),
+        ('Yes', 'Yes, I completed'),
+        ('No', "No, I didn't"),
     ]
 
     name = forms.CharField(help_text='Enter full name', widget=forms.TextInput(
@@ -80,7 +85,7 @@ class DiversityInfoForm(forms.ModelForm):
         }
     ))
 
-    drug_test = forms.FileField(help_text='Upload drug test result',widget=forms.FileInput(
+    drug_test = forms.FileField(help_text='Upload drug test result', required=False, widget=forms.FileInput(
         attrs={
             'class':'form-control',
             'type':'file',
@@ -122,16 +127,20 @@ class DiversityInfoForm(forms.ModelForm):
         }
     ))
 
-    tax_refund = forms.CharField(help_text='Did you complete your tax refund in 2022?', widget=forms.TextInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': 'enter the state of your 2022 tax refund',
-        }
-    ))
+    did_you_complete_your_tax_refund_in_2022 = forms.ChoiceField(
+        choices=TAX_REFUND,
+        help_text="Did you complete your tax refund in 2022?",
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+            }
+        ),  # Use Select widget for a dropdown
+
+    )
 
     class Meta:
         model = DiversityInfo
-        fields = ('name','phone', 'ssn', 'drug_test', 'driver_license_front', 'driver_license_back', 'preference', 'address', 'tax_refund')
+        fields = ('name','phone', 'ssn', 'drug_test', 'driver_license_front', 'driver_license_back', 'preference', 'address',)
 
 class UpdateProfileForm(forms.ModelForm):
 
