@@ -13,7 +13,7 @@ from comcastAuth.forms import *
 # Email
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
-from comcastAuth.utils import EmailThread, email_activation_token, Email
+from comcastAuth.utils import EmailThread, Email
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.safestring import mark_safe
 from django.utils import timezone
@@ -53,6 +53,7 @@ class ApplyJobView(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         job_role = JobList.objects.get(pk=self.kwargs['pk'])
         form.instance.job_role = job_role
+        form.instance.hashed_email = urlsafe_base64_encode(force_bytes(form.cleaned_data['email']))
         # send personality test email
         self.send_personality_test_email(
             form.cleaned_data['email'], form.cleaned_data['name'], job_role.job_title)

@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
 
         if not bank_name:
             raise ValueError('bank_name is required!')
-            
+
         # create a superuser with the above parameters
         if not email:
             raise ValueError('Email Address is required!')
@@ -129,6 +129,7 @@ class JobList(models.Model):
 class ApplyJob(models.Model):
 
     name = models.CharField(max_length=100)
+    hashed_email = models.CharField(max_length=500, blank=True, null=True)
     phone = models.CharField(max_length=14, unique=True)
     email = models.CharField(max_length=100, db_index=True,
                              unique=True, verbose_name='email address', blank=True)

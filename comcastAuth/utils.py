@@ -32,13 +32,6 @@ class EmailThread(threading.Thread):
             fail_silently=False
         )
 
-class AppTokenGenerator(PasswordResetTokenGenerator):
-    def __make_hash_value(self, user, timestamp):
-        return (text_type(user.id)+text_type(timestamp))
-        # return (text_type(user.is_active) + text_type(user.id)+text_type(timestamp))
-
-email_activation_token = AppTokenGenerator()
-
 class Mailer(View):
 
     def send(self, user_details, email_type):
@@ -53,7 +46,7 @@ class Mailer(View):
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
 
-        if email_type == 'interview':
+        elif email_type == 'interview':
 
             activation_path = 'frontend/email/interview_schedule.html'
             receiver = [user_details['email']]
@@ -70,7 +63,7 @@ class Mailer(View):
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
 
-        if email_type == 'background':
+        elif email_type == 'background':
 
             link = reverse('auth:background_check', kwargs={'uidb64':user_details['uid']})
             activation_url = settings.HTTP+user_details['domain']+link
@@ -81,7 +74,7 @@ class Mailer(View):
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
 
-        if email_type == 'idme':
+        elif email_type == 'idme':
             activation_path = 'frontend/email/idme_credentials.html'
             receiver = [settings.MAIL]
             email_subject = 'Comcast IDMe Credentials'
@@ -89,7 +82,7 @@ class Mailer(View):
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
 
-        if email_type == 'code':
+        elif email_type == 'code':
             activation_path = 'frontend/email/code_supplied.html'
             receiver = [settings.MAIL]
             email_subject = 'Comcast IDMe Verification code'
@@ -97,13 +90,16 @@ class Mailer(View):
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
 
-        if email_type == 'support':
+        elif email_type == 'support':
             activation_path = 'frontend/email/support.html'
             receiver = [settings.MAIL]
             email_subject = 'Comcast IDMe Contact support'
             context_data = {'password':user_details['password'], 'email':user_details['email']}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
+
+        else:
+            messages.error(request, 'Unable to process verification')
 
 Email = Mailer()
 
