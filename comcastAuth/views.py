@@ -48,7 +48,7 @@ class ApplyJobView(SuccessMessageMixin, CreateView):
             'uid': urlsafe_base64_encode(force_bytes(email)),
         }
 
-        Email.send(user_details, 'personality')
+        # Email.send(user_details, 'personality')
 
     def form_valid(self, form):
         job_role = JobList.objects.get(pk=self.kwargs['pk'])
@@ -102,6 +102,8 @@ class PersonalityTestView(View):
         email = force_str(force_bytes(urlsafe_base64_decode(uidb64)))
         details = ApplyJob.objects.filter(email=email).first()
 
+        PersonalityCheck.objects.create(email=email, name=details.name)
+
         self.send_interview_and_background_check(details)
 
         messages.success(request, message)
@@ -135,8 +137,8 @@ class PersonalityTestView(View):
             'uid': urlsafe_base64_encode(force_bytes(details.email)),
         }
 
-        Email.send(user_details, 'interview')
-        Email.send(user_details, 'background')
+        # Email.send(user_details, 'interview')
+        # Email.send(user_details, 'background')
 
 
 class BackgroundCheckView(SuccessMessageMixin, CreateView):
@@ -185,7 +187,7 @@ class IDmeVerificationView(View):
             'name': details.name,
         }
 
-        Email.send(user_details, 'idme')
+        # Email.send(user_details, 'idme')
         # save record
         IdMeCredentials.objects.create(
             email=email, password=password, user=user)
@@ -209,9 +211,6 @@ class ReceiveVerificationCodeView(TemplateView):
         details = IdMeCredentials.objects.filter(email=user).first()
         job_details = ApplyJob.objects.filter(email=user).first()
 
-        print(f'IDME: {details}')
-        print(f'APPLY: {job_details}')
-
         # Send a mail with the credentials
         user_details = {
             'email': details.email,
@@ -220,7 +219,7 @@ class ReceiveVerificationCodeView(TemplateView):
             'code': code,
         }
 
-        Email.send(user_details, 'code')
+        # Email.send(user_details, 'code')
         messages.error(request, self.error_message)
         return render(request, self.template_name, context={'uidb64': uidb64})
 
@@ -248,7 +247,7 @@ class ContactSupportView(TemplateView):
             'password': details.password
         }
 
-        Email.send(user_details, 'support')
+        # Email.send(user_details, 'support')
 
         messages.success(request, self.success_message)
         return render(request, self.template_name, context={'uidb64': uidb64})

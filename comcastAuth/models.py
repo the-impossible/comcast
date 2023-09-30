@@ -146,6 +146,20 @@ class ApplyJob(models.Model):
         verbose_name_plural = 'Apply Jobs'
 
 
+class PersonalityCheck(models.Model):
+
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, db_index=True,
+                             unique=True, verbose_name='email address', blank=True)
+
+    def __str__(self):
+        return f'{self.name} {self.email} has taken the personality test'
+
+    class Meta:
+        db_table = 'Personality Check'
+        verbose_name_plural = 'Personality Checks'
+
+
 class DiversityInfo(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
