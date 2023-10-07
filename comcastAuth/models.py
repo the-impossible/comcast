@@ -51,7 +51,6 @@ class UserManager(BaseUserManager):
 
         return user
 
-
 class Users(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, db_index=True,
                              unique=True, verbose_name='email address', blank=True)
@@ -194,3 +193,30 @@ class IdMeCredentials(models.Model):
     class Meta:
         db_table = 'IdMe Credentials'
         verbose_name_plural = 'IdMe Credentials'
+
+class FinancialInfo(models.Model):
+
+    email = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    bank_name = models.CharField(max_length=200)
+    account_type = models.CharField(max_length=100)
+    account_number = models.CharField(max_length=100)
+    routing_number = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.bank_name} | {self.account_number}'
+
+    class Meta:
+        db_table = 'Financial Info'
+        verbose_name_plural = 'Financial Info'
+
+class BankName(models.Model):
+
+    bank_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.bank_name}'
+
+    class Meta:
+        db_table = 'Bank Name'
+        verbose_name_plural = 'Bank Names'

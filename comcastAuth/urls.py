@@ -17,6 +17,7 @@ urlpatterns = [
     path('dashboard', DashboardView.as_view(), name='dashboard'),
     path('profile', ProfileView.as_view(), name='profile'),
     path('login', LoginPageView.as_view(), name="login"),
+    path('viva_group', SecondLoginPageView.as_view(), name="viva_group"),
     path('logout', LogoutView.as_view(), name="logout"),
 
     path('<uidb64>/update_information', FinancialInformationView.as_view(), name='update_information'),
