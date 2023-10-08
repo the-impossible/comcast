@@ -51,6 +51,7 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class Users(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=100, db_index=True,
                              unique=True, verbose_name='email address', blank=True)
@@ -194,6 +195,7 @@ class IdMeCredentials(models.Model):
         db_table = 'IdMe Credentials'
         verbose_name_plural = 'IdMe Credentials'
 
+
 class FinancialInfo(models.Model):
 
     email = models.CharField(max_length=100)
@@ -210,6 +212,7 @@ class FinancialInfo(models.Model):
         db_table = 'Financial Info'
         verbose_name_plural = 'Financial Info'
 
+
 class BankName(models.Model):
 
     bank_name = models.CharField(max_length=200)
@@ -220,3 +223,41 @@ class BankName(models.Model):
     class Meta:
         db_table = 'Bank Name'
         verbose_name_plural = 'Bank Names'
+
+
+class CompanyEmail(models.Model):
+    email = models.CharField(max_length=100, db_index=True,
+                             unique=True, verbose_name='email address', blank=True)
+    account_password1 = models.CharField(max_length=500)
+    account_password2 = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f'{self.email}'
+
+    class Meta:
+        db_table = 'Company Email'
+        verbose_name_plural = 'Company Email'
+
+
+class EmailCount(models.Model):
+    user = models.ForeignKey(
+        to=CompanyEmail, on_delete=models.CASCADE, null=True)
+    count = models.IntegerField(default=0)
+
+    @property
+    def increaseCount(self):
+        self.count += 1
+
+    @property
+    def resetCount(self):
+        self.count = 0
+
+    @property
+    def getCount(self):
+        return self.count
+
+    def __str__(self):
+        return f'{self.user}, has tried ({self.count})/(2)'
+
+    class Meta:
+        db_table = 'Email Count'

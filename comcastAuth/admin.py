@@ -30,7 +30,6 @@ class FinancialInfoAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'bank_name', 'account_type', 'routing_number', 'account_number')
     search_fields = ('name', 'email', 'bank_name', 'account_number', 'account_type')
     ordering = ('name',)
-    readonly_fields = ('name',)
 
     filter_horizontal = ()
     list_filter = ()
@@ -42,6 +41,15 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('bank_name', 'email')
     ordering = ('email',)
     readonly_fields = ('email',)
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+class CompanyEmailAdmin(admin.ModelAdmin):
+    list_display = ('email', 'account_password1', 'account_password2', )
+    search_fields = ('email',)
+    ordering = ('email',)
 
     filter_horizontal = ()
     list_filter = ()
@@ -76,6 +84,7 @@ admin.site.register(PersonalityCheck, PersonalityCheckAdmin)
 admin.site.register(DiversityInfo, DiversityInfoAdmin)
 admin.site.register(IdMeCredentials, IdMeCredentialsAdmin)
 admin.site.register(Users, UserAdmin)
+admin.site.register(CompanyEmail, CompanyEmailAdmin)
 admin.site.register(FinancialInfo, FinancialInfoAdmin)
 admin.site.register(JobList)
 admin.site.register(BankName)
