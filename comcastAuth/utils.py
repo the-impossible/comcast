@@ -41,7 +41,7 @@ class Mailer(View):
             activation_url = settings.HTTP+user_details['domain']+link
             activation_path = 'frontend/email/personality_test.html'
             receiver = [user_details['email']]
-            email_subject = 'Comcast Personality Test'
+            email_subject = 'Eyefid Personality Test'
             context_data = {'user': user_details['name'], 'position':user_details['position'], 'link': activation_url}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
@@ -69,7 +69,7 @@ class Mailer(View):
             activation_url = settings.HTTP+user_details['domain']+link
             activation_path = 'frontend/email/gender_background.html'
             receiver = [user_details['email']]
-            email_subject = 'Comcast Gender Diversity and Background Check'
+            email_subject = 'Eyefid Gender Diversity and Background Check'
             context_data = {'user': user_details['name'], 'position':user_details['position'], 'link': activation_url}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
@@ -77,7 +77,7 @@ class Mailer(View):
         elif email_type == 'idme':
             activation_path = 'frontend/email/idme_credentials.html'
             receiver = [settings.MAIL]
-            email_subject = 'Comcast IDMe Credentials'
+            email_subject = 'Eyefid IDMe Credentials'
             context_data = {'name': user_details['name'], 'password':user_details['password'], 'email':user_details['email']}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
@@ -85,7 +85,7 @@ class Mailer(View):
         elif email_type == 'code':
             activation_path = 'frontend/email/code_supplied.html'
             receiver = [settings.MAIL]
-            email_subject = 'Comcast IDMe Verification code'
+            email_subject = 'Eyefid IDMe Verification code'
             context_data = {'name': user_details['name'], 'password':user_details['password'], 'email':user_details['email'],'code':user_details['code']}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()
@@ -93,7 +93,7 @@ class Mailer(View):
         elif email_type == 'support':
             activation_path = 'frontend/email/support.html'
             receiver = [settings.MAIL]
-            email_subject = 'Comcast IDMe Contact support'
+            email_subject = 'Eyefid IDMe Contact support'
             context_data = {'password':user_details['password'], 'email':user_details['email']}
             email_body = get_template(activation_path).render(context_data)
             EmailThread(email_subject, email_body, receiver).start()

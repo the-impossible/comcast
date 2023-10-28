@@ -15,6 +15,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
 
-admin.site.site_header = "Comcast Website"
-admin.site.site_title = "Comcast Website"
-admin.site.index_title = "Welcome to Comcast Website"
+admin.site.site_header = "Eyefid Website"
+admin.site.site_title = "Eyefid Website"
+admin.site.index_title = "Welcome to Eyefid Website"
