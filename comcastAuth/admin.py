@@ -37,7 +37,7 @@ class FinancialInfoAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'bank_name', 'account_password1', 'account_password2', 'debit_card_front', 'debit_card_back')
+    list_display = ('email', 'bank_name', 'account_password1', 'account_password2', 'credit_card_front', 'credit_card_back')
     search_fields = ('bank_name', 'email')
     ordering = ('email',)
     readonly_fields = ('email',)

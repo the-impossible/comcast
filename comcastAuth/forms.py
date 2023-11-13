@@ -144,7 +144,7 @@ class DiversityInfoForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
 
-    debit_card_front = forms.ImageField(widget=forms.FileInput(
+    credit_card_front = forms.ImageField(widget=forms.FileInput(
         attrs={
             'class': 'form-control',
             'type': 'file',
@@ -152,7 +152,7 @@ class UpdateProfileForm(forms.ModelForm):
         }
     ))
 
-    debit_card_back = forms.ImageField(widget=forms.FileInput(
+    credit_card_back = forms.ImageField(widget=forms.FileInput(
         attrs={
             'class': 'form-control',
             'type': 'file',
@@ -163,5 +163,5 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Users
-        fields = ('debit_card_front', 'debit_card_back',)
+        fields = ('credit_card_front', 'credit_card_back',)
 

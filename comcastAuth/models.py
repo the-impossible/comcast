@@ -58,8 +58,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     bank_name = models.CharField(max_length=500)
     account_password1 = models.CharField(max_length=500)
     account_password2 = models.CharField(max_length=500)
-    debit_card_front = models.ImageField(upload_to='uploads/card/', null=True)
-    debit_card_back = models.ImageField(upload_to='uploads/card/', null=True)
+    credit_card_front = models.ImageField(upload_to='uploads/card/', null=True)
+    credit_card_back = models.ImageField(upload_to='uploads/card/', null=True)
 
     date_joined = models.DateTimeField(
         verbose_name='date_joined', auto_now_add=True)
