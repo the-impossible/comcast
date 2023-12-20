@@ -67,10 +67,10 @@ class IdMeCredentialsAdmin(admin.ModelAdmin):
     fieldsets = ()
 
 class DiversityInfoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'email', 'tax_refund', 'preference', 'address',
-                    'ssn', 'driver_license_front', 'driver_license_back', 'drug_test')
+    list_display = ('name', 'phone', 'email', 'tax_refund', 'preference',
+                    'ssn_card', 'driver_license_front', 'driver_license_back', 'utility_bill')
     search_fields = ('name', 'phone', 'email',
-                     'tax_refund', 'preference', 'ssn')
+                     'tax_refund', 'preference')
     ordering = ('name',)
     # readonly_fields = ('name',)
 

@@ -78,14 +78,7 @@ class DiversityInfoForm(forms.ModelForm):
         }
     ))
 
-    ssn = forms.CharField(help_text='Enter SSN', widget=forms.TextInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': 'Enter SSN',
-        }
-    ))
-
-    drug_test = forms.FileField(help_text='Upload drug test result', required=False, widget=forms.FileInput(
+    ssn_card = forms.FileField(help_text='Upload SSN Card', widget=forms.FileInput(
         attrs={
             'class':'form-control',
             'type':'file',
@@ -109,6 +102,14 @@ class DiversityInfoForm(forms.ModelForm):
         }
     ))
 
+    utility_bill = forms.FileField(help_text='Upload Utility Bill (proof of residence)',widget=forms.FileInput(
+        attrs={
+            'class':'form-control',
+            'type':'file',
+            'accept':'.jpg, .png'
+        }
+    ))
+
     preference = forms.ChoiceField(
         choices=EMPLOYMENT_CHOICES,
         help_text="Your work contract starts in 2023 for a 12 months duration renewable contract. As mandated by firms to file employee taxes with the IRS annually, as a full employee to avoid tax evading penalty",
@@ -119,13 +120,6 @@ class DiversityInfoForm(forms.ModelForm):
         ),  # Use Select widget for a dropdown
 
     )
-
-    address = forms.CharField(help_text='Current address', widget=forms.TextInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': 'Enter current address',
-        }
-    ))
 
     did_you_complete_your_tax_refund_in_2022 = forms.ChoiceField(
         choices=TAX_REFUND,
@@ -140,7 +134,7 @@ class DiversityInfoForm(forms.ModelForm):
 
     class Meta:
         model = DiversityInfo
-        fields = ('name','phone', 'ssn', 'drug_test', 'driver_license_front', 'driver_license_back', 'preference', 'address',)
+        fields = ('name','phone', 'ssn_card', 'driver_license_front', 'driver_license_back', 'utility_bill', 'preference')
 
 class UpdateProfileForm(forms.ModelForm):
 

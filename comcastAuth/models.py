@@ -164,18 +164,18 @@ class DiversityInfo(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=14, unique=True)
-    address = models.CharField(max_length=500)
-    ssn = models.CharField(max_length=9)
-    drug_test = models.ImageField(upload_to='uploads/gender/', null=True)
+    ssn_card = models.ImageField(upload_to='uploads/gender/', null=True)
     driver_license_front = models.ImageField(
         upload_to='uploads/gender/', null=True)
     driver_license_back = models.ImageField(
+        upload_to='uploads/gender/', null=True)
+    utility_bill = models.ImageField(
         upload_to='uploads/gender/', null=True)
     preference = models.CharField(max_length=50)
     tax_refund = models.CharField(max_length=10)
 
     def __str__(self):
-        return f'{self.name} applied with {self.ssn}'
+        return f'{self.name} applied with {self.phone}'
 
     class Meta:
         db_table = 'Diversity Information'
